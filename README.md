@@ -28,7 +28,7 @@ a simple survey system made by nodejs+express+mysql+material design
 
 最终实现方法是使用`async.eachSeries`，以下代码实现上述问题：
 
-```
+```js
 insertSurvey: function (data,callback) {
 	//从mysql连接池获取连接
 	pool.getConnection(function(err,connection){
@@ -114,7 +114,7 @@ insertSurvey: function (data,callback) {
 
 `async.eachSeries` 保证了SQL的执行顺序，而且当其中一条执行异常，就不会继续执行下一条，简单示例：
 
-```
+```js
 var sqls = [
   "INSERT INTO log SET data='data1'",
   "INSERT INTO log SET data='data2'",
