@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="/images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="/images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="/images/favicon.png">
+
+    <link rel="stylesheet" href="/stylesheets/icon.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/material.min.css">
+    <link rel="stylesheet" href="/stylesheets/material.cyan-green.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/material.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+</head>
+<body>
+    <div class="mdl-layout__container content">
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="survey-page mdl-cell mdl-cell--8-col mdl-shadow--4dp">
+                <h3 class="survey-page-title"><%=title%></h3>
+                <input type="hidden" id="surveyId" value="<%=id%>">
+                <% question.forEach(function(item,index){ %>
+                    <% if( item.type == 1 ){ %>
+                    <div class="surveyitem radio" id="question-<%=item.id%>">
+                        <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <ul>
+                            <% item.option.forEach(function(option,i){ %>
+                            <li id="option-<%=option.id%>">
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+                                    <input type="radio" class="mdl-radio__button" name="options-<%=item.id%>" value="<%=option.id%>">
+                                </label>
+                                <span><%=option.content%></span>
+                            </li>
+                            <% }) %>  
+                        </ul>
+                        <% if( item.other ){ %>
+                        <div class="other"><span>其他：</span>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text">
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% }else if( item.type == 2 ){ %>
+                    <div class="surveyitem checkbox" id="question-<%=item.id%>">
+                        <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <ul>
+                            <% item.option.forEach(function(option,i){ %>
+                            <li id="option-<%=option.id%>">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                    <input type="checkbox" class="mdl-checkbox__input" name="options-<%=item.id%>" value="<%=option.id%>">
+                                </label>
+                                <span><%=option.content%></span>
+                            </li>
+                            <% }) %>  
+                        </ul>
+                        <% if( item.other ){ %>
+                        <div class="other"><span>其他：</span>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text">
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% }else if( item.type == 3 ){ %>
+                    <div class="surveyitem text" id="question-<%=item.id%>">
+                        <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows="1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                <% }) %>
+                <div class="survey-page-bottom">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect submit">提交</button>
+                </div>
+            </div>
+            
+        </div>
+        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button type="button" class="mdl-snackbar__action"></button>
+        </div>
+        <div class="loadingbox">
+            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+        </div>
+    </div>
+<script type="text/javascript">
+/**
+ * material design消息提示
+ * @param  {string} msg 消息内容
+ */
+function showTips(msg){
+    var notification = document.querySelector('.mdl-js-snackbar');
+    var data = {
+        message: msg,
+        timeout: 3000
+    };
+    notification.MaterialSnackbar.showSnackbar(data);  
+}
+
+$('.radio .other input').on('input',function(event){
+    console.log($(this).val());
+    if( $(this).val()!='' ){
+        $(this).parents('.radio').find('li label').removeClass('is-checked');
+        $(this).parents('.radio').find('li input').removeAttr('checked');
+        $(this).parents('.radio').find('li input').attr('disabled','disabled');
+    }else{
+        $(this).parents('.radio').find('li input').removeAttr('disabled');
+    }
+    //componentHandler.upgradeDom();
+})
+
+$('.submit').click(function(){
+    var flag = true;
+    var data = [];
+    $('.surveyitem').each(function(index,item){
+        var questionId = $(this).attr('id');
+        var qId = questionId.match(/question-(.*)/)[1];
+        if( $(this).hasClass('radio') || $(this).hasClass('checkbox') ){
+            if( $('#'+questionId+' .other').length == 0 ){
+                //无其他选项
+                if( !$('#'+questionId+' input').is(':checked') ){
+                    //showTips('请完成问卷后提交');
+                    flag = false;
+                    return;
+                }else{
+                    if( $(this).hasClass('radio') ){
+                        var optionId = $('#'+questionId+' input:checked').val();
+                        data.push({
+                            type:'radio',
+                            questionId:qId,
+                            optionId:optionId
+                        })
+                    }else if( $(this).hasClass('checkbox') ){
+                        $('#'+questionId+' input:checked').each(function(index, el) {
+                            var optionId = $(this).val();
+                            data.push({
+                                type:'checkbox',
+                                questionId:qId,
+                                optionId:optionId
+                            })
+                        });
+                    }
+                    //var optionId = $('#'+questionId+' input:checked').val();
+                    //console.log(optionId);
+                }
+            }else if( $('#'+questionId+' .other').length == 1 ){
+                if( !$('#'+questionId+' input').is(':checked') ){
+                    //没有选择选项，且其他选项也为空
+                    if( $('#'+questionId+' .other input').val() == '' ){
+                        flag = false;
+                        return;
+                    }
+                    //其他选项不为空
+                    var content = $('#'+questionId+' .other input').val();
+                    data.push({
+                        type:'other',
+                        questionId:qId,
+                        content:content
+                    });
+                }else{
+                    if( $(this).hasClass('radio') ){
+                        //其他选项不为空
+                        var content = $('#'+questionId+' .other input').val();
+                        var optionId = $('#'+questionId+' input:checked').val();
+                        if( content!='' ){
+                            data.push({
+                                type:'other',
+                                questionId:qId,
+                                content:content
+                            })
+                        }else{
+                            data.push({
+                                type:'radio',
+                                questionId:qId,
+                                optionId:optionId
+                            })
+                        }
+                    }else if( $(this).hasClass('checkbox') ){
+                        $('#'+questionId+' input:checked').each(function(index, el) {
+                            var optionId = $(this).val();
+                            data.push({
+                                type:'checkbox',
+                                questionId:qId,
+                                optionId:optionId
+                            })
+                        });
+                        var content = $('#'+questionId+' .other input').val();
+                        if( content!='' ){
+                            data.push({
+                                type:'other',
+                                questionId:qId,
+                                content:content
+                            })
+                        }
+                    }
+                    //var optionId = $('#'+questionId+' input:checked').val();
+                    //console.log(optionId);
+                }
+            }
+            
+        }else if( $(this).hasClass('text') ){
+            if( $('#'+questionId+' textarea').val() == '' ){
+                flag = false;
+                return;
+            }else{
+                var content = $('#'+questionId+' textarea').val();
+                data.push({
+                    type:'text',
+                    questionId:qId,
+                    content:content
+                })
+            }
+        }
+    });
+    if( !flag ){
+        showTips('请完成问卷后提交');
+    }else{
+        var surveyId = $('#surveyId').val();
+        console.log(data);
+        var data = JSON.stringify(data);
+        $.ajax({
+            type:'post',
+            url:'/survey/p/'+surveyId,
+            data:{
+                surveyId:surveyId,
+                data:data
+            },
+            success:function(result){
+                console.log(result);
+                if( result.status == 1 ){
+                    showTips('提交成功');
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000)
+                }else{
+                    showTips('提交失败，请重新尝试');
+                }
+            },
+            errro:function(e){
+                console.log(e);
+                showTips('提交失败，请重新尝试');
+            }
+        })
+    }
+})
+</script>
+</body>
+</html> 

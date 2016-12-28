@@ -1,0 +1,22 @@
+<aside class="mdl-components-aside  mdl-shadow--4dp mdl-cell mdl-cell--2-col ">
+    <ul class="demo-list-icon mdl-list">
+        <a class="mdl-list__item <% if(tag=='create'){ %> active <% } %>" href="/survey/create">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">mode_edit</i>
+                创建问卷
+            </span>
+        </a>
+        <a class="mdl-list__item <% if(tag=='list'){ %> active <% } %>"  href="/survey/list/1">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">list</i>
+                查看问卷
+            </span>
+        </a>
+        <a class="mdl-list__item <% if(tag=='result'){ %> active <% } %>"  href="/survey/result/1">
+            <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-icon">check_circle</i>
+                问卷结果
+            </span>
+        </a>
+    </ul>
+</aside>

@@ -1,0 +1,717 @@
+<%- include header %>
+        
+        <div class="content mdl-grid--no-spacing">
+            <div class="mdl-components mdl-js-components mdl-grid mdl-grid--no-spacing allheight">
+
+                <%- include aside %>
+                
+                <main class="mdl-components__pages mdl-cell mdl-cell--10-col ">
+                    <div class="mdl-grid">
+
+                        <div class="mdl-cell mdl-cell--6-col mdl-shadow--4dp">
+                            <header class="docs-layout-header mdl-layout__header Blue-Grey">
+                                <p class="cell-title">编辑</p>
+                            </header>
+                            <div class="create-tab Blue-Grey">
+                                <p>
+                                    <span class="tabselect tabactive" id="radio">单选</span>
+                                    <span class="tabselect" id="checkbox">多选</span>
+                                    <span class="tabselect" id="text">问答</span>
+                                </p>
+                            </div>
+                            <div class="mdl-layout__content create-content">
+                                <!-- Radio Start -->
+                                <div class="add-item radio active">
+                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
+                                        <button class="addradio mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="radio-tip">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                        <div class="mdl-tooltip" for="radio-tip">
+                                        点击添加至右侧预览
+                                        </div>
+                                    </header>
+                                    <div class="radio-content">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="radio-title">
+                                            <label class="mdl-textfield__label" for="radio-title">问题标题</label>
+                                        </div>
+                                        <!-- Raised button with ripple -->
+                                        <p>
+                                            <button class="radio-add mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                                添加选项
+                                            </button>
+                                            <label class="radio-other mdl-switch mdl-js-switch mdl-js-ripple-effect" for="radio-switch" id="radio-hasother">
+                                                <input type="checkbox" id="radio-switch" class="mdl-switch__input">
+                                                <span class="mdl-switch__label">其他</span>
+                                            </label>
+                                        </p>
+                                        <div class="redio-optios">
+                                            <div class="item">
+                                                <ul>
+                                                    <li class="item-left">
+                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+                                                            <input type="radio" class="mdl-radio__button" checked>
+                                                        </label>
+                                                    </li>
+                                                    <li class="item-center">
+                                                        <div class="mdl-textfield mdl-js-textfield">
+                                                            <input class="mdl-textfield__input" type="text">
+                                                            <label class="mdl-textfield__label">请输入选项内容</label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item-right"></li>
+                                                </ul> 
+                                            </div>
+                                            <div class="item">
+                                                <ul>
+                                                    <li class="item-left">
+                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+                                                            <input type="radio" class="mdl-radio__button" checked>
+                                                        </label>
+                                                    </li>
+                                                    <li class="item-center">
+                                                        <div class="mdl-textfield mdl-js-textfield">
+                                                            <input class="mdl-textfield__input" type="text">
+                                                            <label class="mdl-textfield__label">请输入选项内容</label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item-right"></li>
+                                                </ul> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Radio End -->
+                                <!-- Checkbox Start -->
+                                <div class="add-item checkbox">
+                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
+                                        <button class="addcheckbox mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="checkbox-tip">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                        <div class="mdl-tooltip" for="checkbox-tip">
+                                        点击添加至右侧预览
+                                        </div>
+                                    </header>
+                                    <div class="radio-content checkbox-content">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="checkbox-title">
+                                            <label class="mdl-textfield__label" for="checkbox-title">问题标题</label>
+                                        </div>
+                                        <!-- Raised button with ripple -->
+                                        <p>
+                                            <button class="checkbox-add mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                                添加选项
+                                            </button>
+                                            <label class="radio-other checkbox-other mdl-switch mdl-js-switch mdl-js-ripple-effect" for="checkbox-switch"  id="checkbox-hasother">
+                                                <input type="checkbox" id="checkbox-switch" class="mdl-switch__input">
+                                                <span class="mdl-switch__label">其他</span>
+                                            </label>
+                                        </p>
+                                        <div class="checkbox-optios">
+                                            <div class="item">
+                                                <ul>
+                                                    <li class="item-left">
+                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                                            <input type="checkbox" class="mdl-checkbox__input" checked>
+                                                        </label>
+                                                    </li>
+                                                    <li class="item-center">
+                                                        <div class="mdl-textfield mdl-js-textfield">
+                                                            <input class="mdl-textfield__input" type="text">
+                                                            <label class="mdl-textfield__label">请输入选项内容</label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item-right"></li>
+                                                </ul> 
+                                            </div>
+                                            <div class="item">
+                                                <ul>
+                                                    <li class="item-left">
+                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                                                            <input type="checkbox" class="mdl-checkbox__input" checked>
+                                                        </label>
+                                                    </li>
+                                                    <li class="item-center">
+                                                        <div class="mdl-textfield mdl-js-textfield">
+                                                            <input class="mdl-textfield__input" type="text">
+                                                            <label class="mdl-textfield__label">请输入选项内容</label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item-right"></li>
+                                                </ul> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Checkbox End -->
+                                <!-- Text Start -->
+                                <div class="add-item text">
+                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
+                                        <button class="addtext mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" 
+                                        id="text-tip">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                        <div class="mdl-tooltip" for="text-tip">
+                                        点击添加至右侧预览
+                                        </div>
+                                    </header>
+                                    <div class="radio-content text-content">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" id="text-title">
+                                            <label class="mdl-textfield__label" for="text-title">问题标题</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Text End-->
+                            </div>
+                        </div>
+                        <input type="hidden" id="datas" value="">
+                        <input type="hidden" id="editid" value="">
+                        <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col mdl-shadow--4dp">
+                            <header class="docs-layout-header mdl-layout__header is-casting-shadow Blue-Grey">
+                                <p class="cell-title">
+                                    <span>预览</span>
+                                    <button id="submit" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect  Grey" disabled>提交</button>
+                                </p>
+                            </header>
+                            <div class="mdl-layout__content create-content showbox">
+                                <div class="mdl-textfield mdl-js-textfield survey-title">
+                                    <input class="mdl-textfield__input" type="text" id="survey-title">
+                                    <label class="mdl-textfield__label" for="survey-title">请填写问卷标题</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+<script>
+$(document).ready(function(){
+    reset('radio');
+    reset('checkbox');
+    reset('text');
+    $('#datas').val('');
+    $('#editid').val('');
+})
+//单选增加选项
+$('.radio-add').click(function(val){
+    addRadioOption();  
+});
+//复选增加选项
+$('.checkbox-add').click(function(val){
+    addCheckboxOption();
+});
+
+/**
+ * 单选操作，添加选项
+ * @param {string} val 仅当编辑时有效，为编辑显示的选项内容
+ */
+function addRadioOption(val){
+    if(!val){
+        var value = '';
+    }else{
+        var value = val;
+    }
+    var html = '<div class="item item-add">'+
+            '<ul><li class="item-left"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
+                '<input type="radio" class="mdl-radio__button" checked>'+
+            '</label></li><li class="item-center">'+
+            '<div class="mdl-textfield mdl-js-textfield">'+
+                '<input class="mdl-textfield__input" type="text" value="'+value+'">'+
+                '<label class="mdl-textfield__label">请输入选项内容</label>'+
+            '</div></li><li class="item-right">'+
+        '<button type="button" class="mdl-chip__action radio-del"><i class="material-icons">cancel</i></button></li></ul></div>';
+    $('.redio-optios').append( html ); 
+    bindDel();
+    componentHandler.upgradeDom(); 
+}
+
+/**
+ * 复选操作，添加选项
+ * @param {string} val 仅当编辑时有效，为编辑显示的选项内容
+ */
+function addCheckboxOption(val){
+    if(!val){
+        var value = '';
+    }else{
+        var value = val;
+    }
+    var html = '<div class="item item-add">'+
+            '<ul><li class="item-left"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
+                '<input type="checkbox" class="mdl-checkbox__input" checked>'+
+            '</label></li><li class="item-center">'+
+            '<div class="mdl-textfield mdl-js-textfield">'+
+                '<input class="mdl-textfield__input" type="text" value="'+value+'">'+
+                '<label class="mdl-textfield__label">请输入选项内容</label>'+
+            '</div></li><li class="item-right">'+
+        '<button type="button" class="mdl-chip__action radio-del"><i class="material-icons">cancel</i></button></li></ul></div>';
+    $('.checkbox-optios').append( html ); 
+    bindDel();
+    componentHandler.upgradeDom(); 
+}
+
+/**
+ * 给新增的选项绑定移除操作
+ */
+function bindDel(){
+    $('.item').mouseenter(function(){
+        $(this).find('.radio-del').show();
+    });
+    $('.item').mouseleave(function(){
+        $(this).find('.radio-del').hide();
+    });
+    $('.radio-del').click(function(){
+        $(this).parents('.item').remove();
+    });
+}
+
+/**
+ * 顶部单选/多选/问答切换操作
+ */
+$('.tabselect').click(function(){
+    var domid = $(this).context.id;
+    if( $(this).hasClass('tabactive') ){
+        //do nothing
+    }else{
+        $('.tabselect').removeClass('tabactive');
+        $(this).addClass('tabactive');
+        $('.add-item').removeClass('active');
+        $('.'+domid).addClass('active');
+    }
+});
+
+/**
+ * 点击单选栏目的添加按钮
+ */
+$('.addradio').click(function(){
+    var item = {};
+    item.type = 'radio';
+    item.title = $('.radio-content #radio-title').val();
+    item.options = [];
+    $('.redio-optios .item').each(function(index,element){
+        var value = $(this).find('.mdl-textfield__input').val();
+        if( value != '' ){
+            item.options.push( value );
+        } 
+    })
+    item.others = $('#radio-switch').is(':checked') ? true : false;
+    if( item.title == '' ){
+        showTips('请填写选项标题');
+    }else if( item.options.length<2 ){
+        showTips('选项不能少于两个');
+    }else{
+        
+        if( $(this).hasClass('edit') ){
+            //编辑
+            var id = $('#editid').val();
+            showView( item.type ,item, id )
+            updateDatas( item,id );
+            reset('radio');
+            //清除编辑标志
+            $(this).removeClass('edit');
+            $('#editid').val('');
+        }else{
+            //新增
+            //console.log( JSON.stringify(item)  );
+            showView( item.type ,item);
+            updateDatas(item);
+            reset('radio');
+        }
+    } 
+});
+
+/**
+ * 点击复选栏目的添加按钮
+ */
+$('.addcheckbox').click(function(){
+    var item = {};
+    item.type = 'checkbox';
+    item.title = $('.checkbox-content #checkbox-title').val();
+    item.options = [];
+    $('.checkbox-optios .item').each(function(index,element){
+        var value = $(this).find('.mdl-textfield__input').val();
+        if( value != '' ){
+            item.options.push( value );
+        } 
+    })
+    item.others = $('#checkbox-switch').is(':checked') ? true : false;
+    if( item.title == '' ){
+        showTips('请填写选项标题');
+    }else if( item.options.length<2 ){
+        showTips('选项不能少于两个');
+    }else{
+        if( $(this).hasClass('edit') ){
+            //编辑
+            var id = $('#editid').val();
+            showView( item.type ,item, id )
+            updateDatas( item,id );
+            reset('chechbox');
+            //清除编辑标志
+            $(this).removeClass('edit');
+            $('#editid').val('');
+        }else{
+            //新增
+            //console.log( JSON.stringify(item)  );
+            showView( item.type ,item);
+            updateDatas(item);
+            reset('checkbox');
+        }
+    }
+});
+
+/**
+ * 点击问答栏目的添加按钮
+ */
+$('.addtext').click(function(event) {
+    var item = {};
+    item.type = 'text';
+    item.title = $('.text-content #text-title').val();
+    if( item.title == '' ){
+        showTips('请填写选项标题');
+    }else{
+        if( $(this).hasClass('edit') ){
+            //编辑
+            var id = $('#editid').val();
+            showView( item.type ,item, id )
+            updateDatas( item,id );
+            reset('text');
+            //清除编辑标志
+            $(this).removeClass('edit');
+            $('#editid').val('');
+        }else{
+            //新增
+            showView( item.type ,item);
+            updateDatas(item);
+            reset('text');
+        }
+    }
+});
+
+/**
+ * 进行新增、编辑、删除操作时更新存在表单中的数据记录
+ * @param  { object } data 要更新的数据
+ * @param  { number } id   仅编辑操作时有效, 为当前编辑数据的数组索引id
+ */
+function updateDatas(data,id){
+    var d = $('#datas').val();
+    if( d == '' ){
+        var result = [];
+        result.push( data );
+        $('#datas').val( JSON.stringify( result ) );
+    }else{
+        var result = JSON.parse( d );
+
+        if( id && result[id] ){
+            //编辑更新
+            result[id] = data;
+            $('#datas').val( JSON.stringify( result ) );
+        }else{
+            //插入更新
+            result.push( data );
+            $('#datas').val( JSON.stringify( result ) );
+        }
+        
+    }
+    //console.log( $('#datas').val() );
+    //console.log( JSON.parse($('#datas').val()) )
+}
+
+/**
+ * material design消息提示
+ * @param  {string} msg 消息内容
+ */
+function showTips(msg){
+    var notification = document.querySelector('.mdl-js-snackbar');
+    var data = {
+        message: msg,
+        timeout: 3000
+    };
+    notification.MaterialSnackbar.showSnackbar(data);  
+}
+
+/**
+ * 添加至右侧预览, 包含新插入及编辑预览
+ * @param  {string} type 选项类型：radio、checkbox、text
+ * @param  {  obj } data 选项数据
+ * @param  {number} id   仅编辑时有效，指定编辑的第几条数据
+ */
+function showView(type,data,id){
+    if( type === 'radio' ){
+        if( !id ){
+            //新插入
+            var itemID = $('.showitem').length+1;
+            var radioHtml = '<div class="showitem" id="'+itemID+'">';
+            radioHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+            radioHtml += '<ul>';
+            for( var i=0;i<data.options.length;i++ ){
+                radioHtml += '<li><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
+                                '<input type="radio" class="mdl-radio__button" name="options-'+itemID+'">'+
+                            '</label>'+
+                            '<span>'+data.options[i]+'</span></li>';
+            }
+            radioHtml += '</ul>';
+            radioHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
+            radioHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
+            $('.showbox').append(radioHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }else{
+            //更新
+            var dom = $('.showitem')[id];
+            $(dom).find('p').remove();
+            $(dom).find('ul').remove();
+            $(dom).find('a').remove();
+
+            
+            var radioHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            radioHtml += '<ul>';
+            for( var i=0;i<data.options.length;i++ ){
+                radioHtml += '<li><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
+                                '<input type="radio" class="mdl-radio__button" name="options-'+itemID+'">'+
+                            '</label>'+
+                            '<span>'+data.options[i]+'</span></li>';
+            }
+            radioHtml += '</ul>';
+            radioHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
+            radioHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
+
+            $(dom).append(radioHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }
+        
+    }
+    if( type === 'checkbox' ){
+        if( !id ){
+            //新插入
+            var itemID = $('.showitem').length+1;
+            var checkboxHtml = '<div class="showitem" id="'+itemID+'">';
+            checkboxHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+            checkboxHtml += '<ul>';
+            for( var i=0;i<data.options.length;i++ ){
+                checkboxHtml += '<li><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
+                                '<input type="checkbox" class="mdl-checkbox__input">'+
+                            '</label>'+
+                            '<span>'+data.options[i]+'</span></li>';
+            }
+            checkboxHtml += '</ul>';
+            checkboxHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
+            checkboxHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
+            $('.showbox').append(checkboxHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }else{
+            //编辑
+            var dom = $('.showitem')[id];
+            $(dom).find('p').remove();
+            $(dom).find('ul').remove();
+            $(dom).find('a').remove();
+
+            var checkboxHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            checkboxHtml += '<ul>';
+            for( var i=0;i<data.options.length;i++ ){
+                checkboxHtml += '<li><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
+                                '<input type="checkbox" class="mdl-checkbox__input">'+
+                            '</label>'+
+                            '<span>'+data.options[i]+'</span></li>';
+            }
+            checkboxHtml += '</ul>';
+            checkboxHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
+            checkboxHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
+
+            $(dom).append(checkboxHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }
+        
+    }
+    if( type == 'text' ){
+        if( !id ){
+            //新插入
+            var itemID = $('.showitem').length+1;
+            var textHtml = '<div class="showitem" id="'+itemID+'">';
+            textHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+            textHtml += '<p><span class="others-line"></span></p>';
+            textHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
+            $('.showbox').append(textHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }else{
+            //编辑
+            var dom = $('.showitem')[id];
+            $(dom).find('p').remove();
+            $(dom).find('a').remove();
+
+            var textHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            textHtml += '<p><span class="others-line"></span></p>';
+            textHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
+
+            $(dom).append(textHtml);
+            componentHandler.upgradeDom();
+            bindClick();
+        }
+        
+    }
+    if( $('.showitem').length > 0 ){
+        $('#submit').removeAttr('disabled');
+    }else{
+        $('#submit').attr('disabled','disabled');
+    }
+}
+
+/**
+ * 插入右侧预览区域的选项绑定编辑和删除操作
+ */
+function bindClick(){
+    //编辑
+    $('.edititem').unbind('click').click(function(){
+        var id = $(this).parents('.showitem').attr('id')-1;
+        //console.log( id );
+        var arr = $('#datas').val();
+        arr = JSON.parse( arr );
+        var data = arr[id];
+        if( !data ){
+            //无数据，出现异常，删除当前行
+            $(this).remove();
+        }else{
+            $('#editid').val( id );
+            if( data.type == 'radio' || data.type == 'checkbox' || data.type == 'text' ){
+                reset(data.type);
+                $('.'+data.type+' header button').addClass('edit');
+            }
+            
+            if( data.type == 'radio' ){
+                $('#radio').click();
+                $('.radio-content #radio-title').val( data.title );
+                if( data.others ){
+                    $('.radio .radio-content .radio-other').addClass('is-checked');
+                    document.getElementById('radio-switch').checked = true;
+                }
+                for( var i=0;i<data.options.length;i++ ){
+                    if( i>=2 ){
+                        addRadioOption( data.options[i] );
+                    }else{
+                        var dom = $('.redio-optios .item')[i];
+                        $(dom).find('.mdl-textfield__input').val( data.options[i] );
+                    }
+                }
+            }else if( data.type == 'checkbox' ){
+                $('#checkbox').click();
+                $('.checkbox-content #checkbox-title').val( data.title );
+                if( data.others ){
+                    $('.checkbox .checkbox-content .checkbox-other').addClass('is-checked');
+                    document.getElementById('checkbox-switch').checked = true;
+                }
+                for( var i=0;i<data.options.length;i++ ){
+                    if( i>=2 ){
+                        addCheckboxOption( data.options[i] );
+                    }else{
+                        var dom = $('.checkbox-optios .item')[i];
+                        $(dom).find('.mdl-textfield__input').val( data.options[i] );
+                    }
+                }
+            }else if( data.type == 'text' ){
+                $('#text').click();
+                $('.text-content #text-title').val( data.title );
+            }
+        }
+    });
+    //删除操作
+    $('.delitem').unbind('click').click(function(){
+        var id = $(this).parents('.showitem').attr('id');
+        $('.showbox #'+id).remove();
+
+        id -= 1;
+        //删除数组中对应的数据
+        var arr = $('#datas').val();
+        arr = JSON.parse( arr );
+        arr.splice(id,1);
+        arr = JSON.stringify( arr );
+        $('#datas').val( arr );
+        //更新序号
+        $('.showitem').each(function(index, el) {
+            $(this).find('.order').text(index+1+'. ');
+            $(this).attr('id',index+1);
+        });
+        //提交按钮状态
+        if( $('.showitem').length > 0 ){
+            $('#submit').removeAttr('disabled');
+        }else{
+            $('#submit').attr('disabled','disabled');
+        }
+    });
+}
+
+/**
+ * 重置，清空标题、选项及其他
+ * @param  {string} option radio/checkbox/text
+ */
+function reset(option){
+    if( option == 'radio' ){
+        $('.radio-content #radio-title').val('');
+        $('.radio-content .redio-optios .item-add').remove();
+        $('.radio-content .redio-optios .item input').val('');
+        $('.radio-content .radio-other').removeClass('is-checked');
+        $('#radio-switch').attr('checked',false);
+    }else if( option == 'checkbox' ){
+        $('.checkbox-content #checkbox-title').val('');
+        $('.checkbox-content .checkbox-optios .item-add').remove();
+        $('.radio-content .checkbox-optios .item input').val('');
+        $('.checkbox-content .checkbox-other').removeClass('is-checked');
+        $('#checkbox-switch').attr('checked',false);
+    }else if( option == 'text' ){
+        $('.text-content #text-title').val('');
+    }
+}
+
+/**
+ * 提交问卷
+ */
+$('#submit').click(function(){
+    if( $('#survey-title').val() == '' ){
+        showTips('问卷标题不能为空');
+    }else if( $('#datas').val() == '' ){
+        showTips( '提交失败，请重新尝试' );
+    }else{
+        showLoading();
+        var title = $('#survey-title').val();
+        var data = $('#datas').val();
+        data = JSON.parse( data );
+        /*console.log( data );
+        console.log( JSON.parse( data ) );*/
+        var postData = {
+                title:title,
+                data:data
+            };
+        postData = JSON.stringify(postData);
+        //data = JSON.parse( data );
+        $.ajax({
+            type:'post',
+            url:'/survey/create',
+            data:{data:postData},
+            success:function(result){
+                hideLoading();
+                console.log('add suceess');
+                if( result.code == 200 ){
+                    showTips( '问卷创建成功' );
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000)
+                }
+            },
+            error:function(e){
+                console.log(e);
+            }
+        })
+    }
+});
+function showLoading(){
+    $('.loadingbox').show();
+}
+function hideLoading(){
+    $('.loadingbox').hide();
+}
+</script>
+
+<%- include footer %>                                         

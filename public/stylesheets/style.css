@@ -1,0 +1,413 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+.Cyan{
+	background-color: rgb(0, 188, 212);
+}
+.Teal{
+	background-color: rgb(0, 150, 136);
+}
+.Green{
+	background-color: rgb(76, 175, 80);
+}
+.Light-Green{
+	background-color: rgb(139, 195, 74);
+}
+.Lime{
+	background-color: rgb(205, 220, 57);
+}
+.Yellow{
+	background-color: rgb(255, 235, 59);
+}
+.Amber{
+	background-color: rgb(255, 193, 7);
+}
+.Orange{
+	background-color: rgb(255, 152, 0);
+}
+.Brown{
+	background-color: rgb(121, 85, 72);
+}
+.Blue-Grey{
+	background-color: rgb(96, 125, 139);
+}
+.Grey{
+	background-color: rgb(158, 158, 158);
+}
+.Deep-Orange{
+	background-color: rgb(255, 87, 34);
+}
+.Red{
+	background-color: rgb(244, 67, 54);
+}
+.Purple{
+	background-color: rgb(156, 39, 176);
+}
+.Deep Purple{
+	background-color: rgb(103, 58, 183);
+}
+.Blue{
+	background-color: rgb(33, 150, 243);
+}
+.Light-Blue{
+	background-color: rgb(3, 169, 244);
+}
+.Indigo{
+	background-color: rgb(63, 81, 181);
+}
+.Pink,.Pink:hover{
+	background-color: rgb(233, 30, 99);
+}
+
+.mdl-components-aside{
+	display: inline-block;
+    background: #fff;
+    
+    box-sizing: border-box;
+    padding: 24px 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    z-index: 1;
+}
+.mdl-components__pages{
+	display: inline-block;
+}
+.content{
+	background: #fafafa;
+	/*height: 100%;*/
+}  
+.allheight{
+	/*height: 100%;*/	
+	position: relative;
+}
+.allheight main{
+	height: 100%;
+    overflow: auto;
+}
+.mdl-layout__header-row{
+	/*background-color: rgb(0,188,212);	*/
+} 
+.create-content{
+	width: 90%;
+	margin: 10px 5%;
+    border: 1px solid #efefef;
+}
+.radio-content{
+	padding: 10px 10px 5px 20px;
+}
+.radio-other{
+	width: auto;
+    margin-left: 100px;
+}
+.item .mdl-radio{
+	top: -15px;
+    margin-right: 5px;
+}
+.item{
+	height: 50px;
+	overflow: hidden;
+	padding: 0 0 10px 10px;
+}
+.item:hover{
+	background-color: #eee;
+}
+.create-content .mdl-textfield{
+	/*width: 400px;*/
+	width: 80%;
+}
+.radio-del{
+	/*margin-left: 20px;*/
+	display: none;
+}
+.create-tab p{
+	width: 100%;
+    height: 53px;
+    line-height: 50px;
+}
+.create-tab p span{
+	width: 33.3%;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+.create-tab p span.tabactive{
+	border-bottom-color: rgb(233, 30, 99)
+}
+.cell-title{
+	height: 64px;
+    line-height: 64px;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+}
+.add-item{
+	display: none;
+}
+.add-item.active{
+	display: block;
+}
+.mdl-checkbox{
+	width: auto;
+}
+.showitem ul li,.surveyitem ul li{
+	list-style: none;
+    display: flex;
+    color: #666;
+    font-size: 12px;
+}
+.showbox{
+	border: 0;
+}
+.showitem ul,.surveyitem ul{
+	margin: 0;
+    padding: 0;
+}
+.showitem p,.surveyitem p{
+	margin: 0;
+    font-size: 12px;
+}
+.showitem,.surveyitem{
+	background-color: #efefef;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+.others-line{
+	display: inline-block;
+    border-bottom: 1px solid #ccc;
+    width: 50%;
+}
+.mdl-list__item{
+	cursor: pointer;
+	text-decoration: none;
+}
+.mdl-list__item:hover{
+	background-color: #eee;
+}
+.mdl-list__item.active{
+	background-color: #eee;
+}
+.edititem{
+	position: absolute;
+    top: 0;
+    right: -70px;
+    display: inline-block;
+    padding: 3px 20px;
+    background-color: #ccc;
+    color: #333;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    transition:all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.delitem{
+	position: absolute;
+    bottom: 0;
+    right: -70px;
+    display: inline-block;
+    padding: 3px 20px;
+    background-color: #ccc;
+    color: #333;
+    border-top-left-radius: 5px;
+    cursor: pointer;
+    transition:all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.showitem:hover .edititem,.showitem:hover .delitem{
+	right: 0;
+}
+#submit{
+	float: right;
+    margin-top: 15px;
+    margin-right: 10px;
+    color: #eee;
+}
+.mdl-layout__header-row{
+	color: #fff;
+}
+.item-left,.item-center,.item-right{
+	display: inline-block;
+}
+.item ul li{
+	list-style: none;
+	float: left;
+}
+.item ul{
+	display: flex;
+    padding-left: 0;
+    margin: 0;
+}
+.item-left,.item-right{
+	padding: 20px 0;
+	width: 7%;
+}
+.item-center{
+	width: 86%;
+}
+.create-content .item .mdl-textfield{
+	width: 95%;
+}
+.loadingbox{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(96, 125, 139,0.2);
+    z-index: 100;
+    display: none;
+}
+.loadingbox .mdl-spinner {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+}
+.list-table{
+	width: 100%;
+}
+.create-content .survey-title{
+	width: 100%;
+}
+.create-content .survey-title input{
+	text-align: center;
+}
+.survey-page{
+	margin: 10px auto !important;
+	background-color: #fff;
+}
+.survey-page-title{
+	text-align: center;
+}
+.surveyitem{
+	margin: 5px 20px;
+}
+.surveyitem p{
+	font-size: 18px;
+}
+.surveyitem ul li{
+	font-size: 14px;
+	margin: 5px 0;
+}
+.survey-page-bottom{
+	text-align: center;
+	margin: 20px 0;
+}
+.other .mdl-textfield{
+	padding: 0;
+}
+.modal{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    display: none;
+}
+.modal .showbox{
+	width: 70%;
+	height: 80%;
+	overflow: auto;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.showbox h4{
+	text-align: center;
+}
+.close-modal{
+	float: right;
+}
+.mdl-data-table.list-table tbody tr td{
+	padding: 9px 18px;
+}
+.login-card.mdl-card {
+	width: 512px;
+    margin: 0 auto;
+    height: 400px;
+    margin-top: 50px;
+}
+.login-card > .mdl-card__title {
+	color: #fff;
+	height: 176px;
+	background: url('../images/welcome_card.jpg') center / cover;
+}
+.login-card > .mdl-card__menu {
+	color: #fff;
+}
+.input-box{
+	text-align: center;
+}
+#login-btn{
+	width: 120px;
+}
+.login-content{
+	background-image: url(../images/bgimg.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: blur(2px);
+    -webkit-filter:blur(2px);
+}
+#Pagination ul li{
+	list-style: none;
+	float: left;
+}
+#Pagination ul li.active a{
+	background-color: #ccc;
+}
+#Pagination{
+	display: inline-block;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+#Pagination ul{
+	float: right;
+}
+.mdl-layout__header-row{
+	padding: 0 40px 0 40px;
+}
+.titlemore{
+	max-width: 500px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}

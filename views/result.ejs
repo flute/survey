@@ -1,0 +1,206 @@
+<%- include header %> 
+        <div class="content mdl-grid--no-spacing">
+            <div class="mdl-components mdl-js-components mdl-grid mdl-grid--no-spacing allheight">
+                <%- include aside %>
+                <main class="mdl-components__pages mdl-cell mdl-cell--10-col ">
+                    <div class="mdl-grid">
+                       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp list-table">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">ID</th>
+                                    <th>问卷ID</th>
+                                    <th>问卷标题</th>
+                                    <th>提交时间</th>
+                                    <th>提交人</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% data.forEach(function(tag,index){ %>
+                                <tr id="<%=tag.id%>">
+                                    <td class="mdl-data-table__cell--non-numeric"><%= tag.id %></td>
+                                    <td><%= tag.surveyId %></td>
+                                    <td class="titlemore"><%= tag.title %></td>
+                                    <td><%= tag.createdAt %></td>
+                                    <td><%= tag.userId %></td>
+                                    <td>
+                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect showresult">查看</a>
+                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect Pink delbtn">删除</a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                            </tbody>
+                        </table> 
+                        <div id="Pagination"></div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+<div class="modal">
+    <div class="showbox mdl-shadow--6dp">
+        <header>
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored close-modal">
+                <i class="material-icons">close</i>
+            </button>
+        </header>
+    </div>
+</div>  
+<script>
+/**
+ * material design消息提示
+ * @param  {string} msg 消息内容
+ */
+function showTips(msg){
+    var notification = document.querySelector('.mdl-js-snackbar');
+    var data = {
+        message: msg,
+        timeout: 3000
+    };
+    notification.MaterialSnackbar.showSnackbar(data);  
+}
+//查看问卷结果详情
+$('.showresult').click(function(){
+    var id = $(this).parents('tr').attr('id');
+    $.ajax({
+        type:'post',
+        url:'/survey/result/p/'+id,
+        success:function(result){
+            console.log(result);
+            if( result.status == 1 ){
+                var data = result.result;
+                renderResult(data);
+                $('.modal').show();
+            }
+        },
+        error:function(error){
+            console.log(error);
+        }
+    })
+});
+//关闭模态窗
+$('.close-modal').click(function(){
+    $('.modal').hide();
+})
+//渲染问卷结果DOM
+function renderResult(data){
+    var html = '';
+    html += '<h4>'+data.title+'</h4>';
+    var data = data.question;
+    if( data && data.length>0 ){
+        for( var i=0;i<data.length;i++ ){
+            if( data[i].type == 1 ){
+                var options = '';
+                for( var j=0;j<data[i].option.length;j++ ){
+                    var d = data[i].option[j];
+                    if( d.checked ){
+                        var checked = 'checked';
+                    }else{
+                        var checked = '';
+                    }
+                    options += '<li>'+
+                                    '<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
+                                        '<input disabled type="radio" class="mdl-radio__button" name="radio-'+d.id+'" '+checked+'>'+
+                                    '</label>'+
+                                    '<span>'+d.content+'</span>'+
+                                '</li>';
+                }
+                if( data[i].other == 1 ){
+                    var otherResult = data[i].otherResult ? data[i].otherResult : '';
+                    var other = '<p>'+
+                                    '其他：<span class="others-line">'+otherResult+'</span>'+
+                                '</p>';
+                }else{
+                    var other = '';
+                }
+                html += '<div class="showitem" id="'+data[i].id+'">'+
+                            '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+
+                            '<ul>'+options+'</ul>'+other+
+                        '</div>';
+            }else if( data[i].type == 2 ){
+                var options = '';
+                for( var j=0;j<data[i].option.length;j++ ){
+                    var d = data[i].option[j];
+                    if( d.checked ){
+                        var checked = 'checked';
+                    }else{
+                        var checked = '';
+                    }
+                    options += '<li>'+
+                                    '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
+                                        '<input disabled type="checkbox" class="mdl-checkbox__input" '+checked+'>'+
+                                    '</label>'+
+                                    '<span>'+d.content+'</span>'+
+                                '</li>';
+                }
+                if( data[i].other == 1 ){
+                    var otherResult = data[i].otherResult ? data[i].otherResult : '';
+                    var other = '<p>'+
+                                    '其他：<span class="others-line">'+otherResult+'</span>'+
+                                '</p>';
+                }else{
+                    var other = '';
+                }
+                html += '<div class="showitem" id="'+data[i].id+'">'+
+                            '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+
+                            '<ul>'+options+'</ul>'+other+
+                        '</div>';
+            }else if( data[i].type == 3 ){
+                html += '<div class="showitem" id="'+data[i].id+'">'+
+                            '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+
+                            '<p>'+
+                                '<span class="others-line">'+data[i].result+'</span>'+
+                            '</p>'+
+                        '</div>';
+            }
+        }
+        if( html!='' ){
+            $('.showbox h4').remove();
+            $('.showbox .showitem').remove();
+            $('.showbox').append(html);
+            componentHandler.upgradeDom();
+        }
+    }
+}
+//删除结果
+$('.delbtn').click(function(){
+    var id = $(this).parents('tr').attr('id');
+    $.ajax({
+        type:'GET',
+        url:'/survey/result/del/'+id,
+        success:function(result){
+            if( result.status == 1 ){
+                showTips('删除成功');
+                $('#'+id).remove();
+            }else{
+                showTips('删除失败，请重新尝试');
+            }
+        },
+        error:function(e){
+            console.log(e);
+            showTips('删除失败，请重新尝试');
+        }
+    })
+});
+//分页
+var options = {  
+    currentPage:"<%=currentPage%>",  
+    totalPages:"<%=totalPages%>",  
+    size:"large",  
+    alignment:"center",  
+    itemContainerClass: function (type, page, current) {  
+        return (page === current) ? "active" : "pointer-cursor";  
+    },  
+    onPageClicked: function(e,originalEvent,type,page){  
+        //alert("Page item clicked, type: "+type+" page: "+page);  
+    },  
+    onPageChanged: function(e,oldPage,newPage){  
+        //alert("Current page changed, old: "+oldPage+" new: "+newPage);  
+    },  
+    pageUrl:function(type,page,current){  
+        return "/survey/result/"+page;  
+    }  
+};
+$("#Pagination").bootstrapPaginator(options);
+</script>
+<%- include footer %>                                         
