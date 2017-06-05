@@ -1,21 +1,18 @@
-var mysql = require('mysql');
-var conf = require('../conf/db.js');
+var mysql = require('../service/mysql');
 var sql = require('./createModel.js');
 //async
 var async = require('async');
 //时间转换组件
 var moment = require('moment');
-//使用连接池，提升性能
-var pool = mysql.createPool( conf.mysql );
 
 module.exports = {
 	insertSurvey: function (req,callback) {
-		pool.getConnection(function(err,connection){
+		mysql(function(err,connection){
 			if( err ){
 				callback(err);
 				return;
 			}
-			connection.query( sql.insertSurvey,[req.createdAt, req.updatedAt, req.adminId, req.title], function(err,res){
+			connection.query( sql.insertSurvey,[req.createdAt, req.updatedAt, req.adminId, req.name, req.code, req.title], function(err,res){
 				if(res){
 					console.log('问卷插入成功：'+res.insertId);
 					var result = {
@@ -39,7 +36,7 @@ module.exports = {
 			})
 		})
 	},
-	insertQuestion:function(req,questioncb){
+	insertQuestion: function(req,questioncb){
 		var data = req.data;
 		var surveyId = req.surveyId;
 		var datetime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -58,14 +55,14 @@ module.exports = {
 					other = 0;
 			}
 			insertQuestionSql.push({
-				survey:"insert into t_survey_question(createdAt, updatedAt, surveyId, title, type, other) values('"+datetime+"','"+datetime+"','"+surveyId+"','"+data[i].title+"','"+type+"','"+other+"')",
+				survey:"insert into t_survey_question(createdAt, updatedAt, surveyId, title, type, other, img) values('"+datetime+"','"+datetime+"','"+surveyId+"','"+data[i].title+"','"+type+"','"+other+"','"+data[i].img+"')",
 				data:data[i]
 			})    					
 		}
 		
 		if( insertQuestionSql && insertQuestionSql.length>0 ){
 
-			pool.getConnection(function(err,connection){
+			mysql(function(err,connection){
 				if( err ){
 					questioncb(err);
 					return;
@@ -90,8 +87,8 @@ module.exports = {
 
 								for( var j=0;j<item.data.options.length;j++ ){
 									var option = item.data.options[j];
-									sql = "insert into t_survey_option(createdAt, updatedAt, questionId, content) values('"+datetime+"','"+datetime+"','"+questionId+"','"+option+"')";
-									insertOptionSql.push(sql);
+									var optionSql = "insert into t_survey_option(createdAt, updatedAt, questionId, content) values('"+datetime+"','"+datetime+"','"+questionId+"','"+option+"')";
+									insertOptionSql.push(optionSql);
 								}
 
 								//异步顺序插入选项

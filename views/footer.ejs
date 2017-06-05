@@ -1,44 +1,36 @@
-<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-    <div class="mdl-snackbar__text"></div>
-    <button type="button" class="mdl-snackbar__action"></button>
-</div>
-<div class="loadingbox">
-    <div class="mdl-spinner mdl-js-spinner is-active"></div>
-</div>
+ 					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="/javascripts/app.js"></script>
 <script>
 /**
  * material design消息提示
  * @param  {string} msg 消息内容
  */
-function showTips(msg){
-    var notification = document.querySelector('.mdl-js-snackbar');
-    var data = {
-        message: msg,
-        timeout: 3000
-    };
-    notification.MaterialSnackbar.showSnackbar(data);  
+Messenger.options = {
+    extraClasses: 'messenger-fixed messenger-on-bottom',
+    theme: 'flat'
+};
+function showTips(msg,type){
+	if( type && type == 'error' ){
+		Messenger().post({
+			message: msg,
+			type:'error',
+			hideAfter: 3,
+			hideOnNavigate: true,
+			showCloseButton: true
+		}); 
+	}else{
+		Messenger().post({
+			message: msg,
+			hideAfter: 3,
+			hideOnNavigate: true,
+			showCloseButton: true
+		}); 
+	}
 }
-$(document).ready(function(){
-	var height = $(window).height()-64;
-	$('.allheight').css('height',height+'px');
-});
-$(window).resize(function(){
-	var height = $(window).height()-64;
-	$('.allheight').css('height',height+'px');
-})
-$('.logout').click(function(){
-	$.ajax({
-		type:'get',
-		url:'/logout',
-		success:function(result){
-			//注销成功
-			window.location.href = '/login';
-		},
-		error:function(error){
-			showTips('注销失败');
-		}
-	})
-})
 </script>
 </body>
-</html> 
+</html>

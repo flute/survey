@@ -1,192 +1,250 @@
 <%- include header %>
-        
-        <div class="content mdl-grid--no-spacing">
-            <div class="mdl-components mdl-js-components mdl-grid mdl-grid--no-spacing allheight">
-
-                <%- include aside %>
-                
-                <main class="mdl-components__pages mdl-cell mdl-cell--10-col ">
-                    <div class="mdl-grid">
-
-                        <div class="mdl-cell mdl-cell--6-col mdl-shadow--4dp">
-                            <header class="docs-layout-header mdl-layout__header Blue-Grey">
-                                <p class="cell-title">编辑</p>
-                            </header>
-                            <div class="create-tab Blue-Grey">
-                                <p>
-                                    <span class="tabselect tabactive" id="radio">单选</span>
-                                    <span class="tabselect" id="checkbox">多选</span>
-                                    <span class="tabselect" id="text">问答</span>
-                                </p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="create-box shadow-4dp">
+            <p class="cell-title Blue-Grey">编辑</p>
+            <div class="create-tab Blue-Grey">
+                <p>
+                    <span class="tabselect tabactive" id="radio">单选</span>
+                    <span class="tabselect" id="checkbox">多选</span>
+                    <span class="tabselect" id="text">问答</span>
+                </p>
+            </div>
+            <div class="create-content">
+                <!-- Radio Start -->
+                <div class="add-item radio active">
+                    <p class="Grey item-title">
+                        <button class="btn addradio Grey shadow-2dp">添加至右侧预览</button>
+                    </p>
+                    <div class="radio-content">
+                        <input type="text" class="form-control" placeholder="问题标题" id="radio-title">
+                        <input type="hidden" class="imgUrl" value="">
+                        <!-- upload -->
+                        <div class="form-group uploadimg">
+                            <div class="col-sm-6 control-label">
+                                <div class="input-group">
+                                    <input class="file-input uploadFile" type="file" > 
+                                    <input class="form-control file-cover" type="text" placeholder="问题图片,可选" readonly="readonly">
+                                    <div class="input-group-addon">
+                                        <span class="choose-btn">选择图片</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mdl-layout__content create-content">
-                                <!-- Radio Start -->
-                                <div class="add-item radio active">
-                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
-                                        <button class="addradio mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="radio-tip">
-                                            <i class="material-icons">add</i>
-                                        </button>
-                                        <div class="mdl-tooltip" for="radio-tip">
-                                        点击添加至右侧预览
-                                        </div>
-                                    </header>
-                                    <div class="radio-content">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" type="text" id="radio-title">
-                                            <label class="mdl-textfield__label" for="radio-title">问题标题</label>
-                                        </div>
-                                        <!-- Raised button with ripple -->
-                                        <p>
-                                            <button class="radio-add mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                                添加选项
-                                            </button>
-                                            <label class="radio-other mdl-switch mdl-js-switch mdl-js-ripple-effect" for="radio-switch" id="radio-hasother">
-                                                <input type="checkbox" id="radio-switch" class="mdl-switch__input">
-                                                <span class="mdl-switch__label">其他</span>
-                                            </label>
-                                        </p>
-                                        <div class="redio-optios">
-                                            <div class="item">
-                                                <ul>
-                                                    <li class="item-left">
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
-                                                            <input type="radio" class="mdl-radio__button" checked>
-                                                        </label>
-                                                    </li>
-                                                    <li class="item-center">
-                                                        <div class="mdl-textfield mdl-js-textfield">
-                                                            <input class="mdl-textfield__input" type="text">
-                                                            <label class="mdl-textfield__label">请输入选项内容</label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item-right"></li>
-                                                </ul> 
-                                            </div>
-                                            <div class="item">
-                                                <ul>
-                                                    <li class="item-left">
-                                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
-                                                            <input type="radio" class="mdl-radio__button" checked>
-                                                        </label>
-                                                    </li>
-                                                    <li class="item-center">
-                                                        <div class="mdl-textfield mdl-js-textfield">
-                                                            <input class="mdl-textfield__input" type="text">
-                                                            <label class="mdl-textfield__label">请输入选项内容</label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item-right"></li>
-                                                </ul> 
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btnSub">上传</button>
+                                <div class="imgOption">
+                                    <a class="btn btn-info avatar" role="button" data-toggle="popover">缩略图</a>
+                                    <button class="btn btn-danger delimg">删除</button>
                                 </div>
-                                <!-- Radio End -->
-                                <!-- Checkbox Start -->
-                                <div class="add-item checkbox">
-                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
-                                        <button class="addcheckbox mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="checkbox-tip">
-                                            <i class="material-icons">add</i>
-                                        </button>
-                                        <div class="mdl-tooltip" for="checkbox-tip">
-                                        点击添加至右侧预览
-                                        </div>
-                                    </header>
-                                    <div class="radio-content checkbox-content">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" type="text" id="checkbox-title">
-                                            <label class="mdl-textfield__label" for="checkbox-title">问题标题</label>
-                                        </div>
-                                        <!-- Raised button with ripple -->
-                                        <p>
-                                            <button class="checkbox-add mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                                添加选项
-                                            </button>
-                                            <label class="radio-other checkbox-other mdl-switch mdl-js-switch mdl-js-ripple-effect" for="checkbox-switch"  id="checkbox-hasother">
-                                                <input type="checkbox" id="checkbox-switch" class="mdl-switch__input">
-                                                <span class="mdl-switch__label">其他</span>
-                                            </label>
-                                        </p>
-                                        <div class="checkbox-optios">
-                                            <div class="item">
-                                                <ul>
-                                                    <li class="item-left">
-                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                                                            <input type="checkbox" class="mdl-checkbox__input" checked>
-                                                        </label>
-                                                    </li>
-                                                    <li class="item-center">
-                                                        <div class="mdl-textfield mdl-js-textfield">
-                                                            <input class="mdl-textfield__input" type="text">
-                                                            <label class="mdl-textfield__label">请输入选项内容</label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item-right"></li>
-                                                </ul> 
-                                            </div>
-                                            <div class="item">
-                                                <ul>
-                                                    <li class="item-left">
-                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                                                            <input type="checkbox" class="mdl-checkbox__input" checked>
-                                                        </label>
-                                                    </li>
-                                                    <li class="item-center">
-                                                        <div class="mdl-textfield mdl-js-textfield">
-                                                            <input class="mdl-textfield__input" type="text">
-                                                            <label class="mdl-textfield__label">请输入选项内容</label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="item-right"></li>
-                                                </ul> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Checkbox End -->
-                                <!-- Text Start -->
-                                <div class="add-item text">
-                                    <header class="docs-layout-header mdl-layout__header is-casting-shadow Grey">
-                                        <button class="addtext mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" 
-                                        id="text-tip">
-                                            <i class="material-icons">add</i>
-                                        </button>
-                                        <div class="mdl-tooltip" for="text-tip">
-                                        点击添加至右侧预览
-                                        </div>
-                                    </header>
-                                    <div class="radio-content text-content">
-                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                            <input class="mdl-textfield__input" type="text" id="text-title">
-                                            <label class="mdl-textfield__label" for="text-title">问题标题</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Text End-->
                             </div>
                         </div>
-                        <input type="hidden" id="datas" value="">
-                        <input type="hidden" id="editid" value="">
-                        <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col mdl-shadow--4dp">
-                            <header class="docs-layout-header mdl-layout__header is-casting-shadow Blue-Grey">
-                                <p class="cell-title">
-                                    <span>预览</span>
-                                    <button id="submit" class="mdl-button mdl-js-button mdl-button--raised  mdl-js-ripple-effect  Grey" disabled>提交</button>
-                                </p>
-                            </header>
-                            <div class="mdl-layout__content create-content showbox">
-                                <div class="mdl-textfield mdl-js-textfield survey-title">
-                                    <input class="mdl-textfield__input" type="text" id="survey-title">
-                                    <label class="mdl-textfield__label" for="survey-title">请填写问卷标题</label>
-                                </div>
+
+                        <!-- upload -->
+                        <p class="add-option">
+                            <button class="radio-add btn btn-default">增加选项</button>
+                            <label>
+                                <input type="checkbox" class="radio-other" id="radio-switch"> 其他（是否添加其他选项）
+                            </label>
+                        </p>
+                        
+                        <div class="radio-optios">
+                            <div class="item">
+                                <ul>
+                                    <li class="item-left">
+                                        <input type="radio" class="mdl-radio__button" checked>
+                                    </li>
+                                    <li class="item-center">
+                                        <input type="text" class="form-control" placeholder="请输入选项内容">
+                                    </li>
+                                    <li class="item-right"></li>
+                                </ul> 
+                            </div>
+                            <div class="item">
+                                <ul>
+                                    <li class="item-left">
+                                        <input type="radio" class="mdl-radio__button" checked>
+                                    </li>
+                                    <li class="item-center">
+                                        <input type="text" class="form-control" placeholder="请输入选项内容">
+                                    </li>
+                                    <li class="item-right"></li>
+                                </ul> 
                             </div>
                         </div>
                     </div>
-                </main>
+                </div>
+                <!-- Radio End -->
+                <!-- Checkbox Start -->
+                <div class="add-item checkbox">
+                    <p class="Grey item-title">
+                        <button class="btn addcheckbox Grey shadow-2dp">添加至右侧预览</button>
+                    </p>
+                    <div class="radio-content checkbox-content">
+                        <input type="text" class="form-control" placeholder="问题标题" id="checkbox-title">
+                        <input type="hidden" class="imgUrl" value="">
+                        <!-- upload -->
+                        <div class="form-group uploadimg">
+                            <div class="col-sm-6 control-label">
+                                <div class="input-group">
+                                    <input class="file-input uploadFile" type="file" > 
+                                    <input class="form-control file-cover" type="text" placeholder="问题图片,可选" readonly="readonly">
+                                    <div class="input-group-addon">
+                                        <span class="choose-btn">选择图片</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btnSub">上传</button>
+                                <div class="imgOption">
+                                    <a class="btn btn-info avatar" role="button" data-toggle="popover">缩略图</a>
+                                    <button class="btn btn-danger delimg">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- upload -->
+                        <p class="add-option">
+                            <button class="checkbox-add btn btn-default">增加选项</button>
+                            <label>
+                                <input type="checkbox" class="radio-other checkbox-other" id="checkbox-switch"> 其他（是否添加其他选项）
+                            </label>
+                        </p>
+                        <div class="checkbox-optios">
+                            <div class="item">
+                                <ul>
+                                    <li class="item-left">
+                                        <input type="checkbox" checked> 
+                                    </li>
+                                    <li class="item-center">
+                                        <input type="text" class="form-control" placeholder="请输入选项内容">
+                                    </li>
+                                    <li class="item-right"></li>
+                                </ul> 
+                            </div>
+                            <div class="item">
+                                <ul>
+                                    <li class="item-left">
+                                        <input type="checkbox" checked>
+                                    </li>
+                                    <li class="item-center">
+                                        <input type="text" class="form-control" placeholder="请输入选项内容">
+                                    </li>
+                                    <li class="item-right"></li>
+                                </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Checkbox End -->
+                <!-- Text Start -->
+                <div class="add-item text">
+                    <p class="Grey item-title">
+                        <button class="btn addtext Grey shadow-2dp">添加至右侧预览</button>
+                    </p>
+                    <div class="radio-content text-content">
+                        <input type="text" class="form-control" placeholder="问题标题" id="text-title">
+                        <input type="hidden" class="imgUrl" value="">
+                        <!-- upload -->
+                        <div class="form-group uploadimg">
+                            <div class="col-sm-6 control-label">
+                                <div class="input-group">
+                                    <input class="file-input uploadFile" type="file" > 
+                                    <input class="form-control file-cover" type="text" placeholder="问题图片,可选" readonly="readonly">
+                                    <div class="input-group-addon">
+                                        <span class="choose-btn">选择图片</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btnSub">上传</button>
+                                <div class="imgOption">
+                                    <a class="btn btn-info avatar" role="button" data-toggle="popover">缩略图</a>
+                                    <button class="btn btn-danger delimg">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- upload -->
+                    </div>
+                </div>
+                <!-- Text End-->
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <input type="hidden" id="datas" value="">
+        <input type="hidden" id="editid" value="">
+        <div class="shadow-4dp">
+            <p class="cell-title Blue-Grey">
+                <span>预览</span>
+                <button class="btn Grey shadow-2dp" id="submit" disabled>提交</button>
+            </p>
+            <div class="create-content showbox">
+                <div class="survey-title">
+                    <input type="text" class="form-control" id="survey-title" placeholder="请填写问卷标题">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>       
+
 <script>
+$('.delimg').click(function(){
+    $(this).parent().css('visibility','hidden');
+    $(this).parents('.uploadimg').find('.uploadFile').val('');
+    $(this).parents('.uploadimg').find('.file-cover').val('');
+    $(this).parents('.add-item').find('.imgUrl').val('');
+});
+
+$('.btnSub').click(function(){
+    var formData = new FormData();
+    var file = $(this).parents('.uploadimg').find('.uploadFile')[0].files[0];
+    if( !file ){
+        return;
+    }
+    formData.append('file', file );
+
+    var dom = $(this).parents('.add-item').find('.imgUrl');
+        option = $(this).parents('.add-item').find('.imgOption');
+
+    $.ajax({
+        url: '/upload',
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success:function(result){
+            //console.log(result);
+            if( result.status == 1 ){
+                showTips('上传成功');
+                $(dom).val(result.imgUrl);
+                $(option).css('visibility','visible');
+                //$(option).find('div.popover').remove();
+                $(option).find('a').popover('destroy');
+                //$(option).find('a').unbind('click');
+                setTimeout(function(){
+                    $(option).find('a').popover({
+                        html:true,
+                        content:'<img src="'+result.imgUrl+'" height="200px">',
+                        trigger:'click'
+                    })
+                }, 500)
+
+            }else if( result.status == 2 ){
+                showTips( result.msg,'error');
+            }else{
+                showTips('上传失败，请重新尝试','error');
+            }
+        },
+        error:function(e){
+            console.log(e);
+            showTips('上传失败，请重新尝试','error');
+        }
+    });
+
+})
+$('.imgOption .avatar').click(function(){
+    $('.popover-content img').prop('src', $('.imgUrl').val())
+})
 $(document).ready(function(){
     reset('radio');
     reset('checkbox');
@@ -214,17 +272,19 @@ function addRadioOption(val){
         var value = val;
     }
     var html = '<div class="item item-add">'+
-            '<ul><li class="item-left"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
-                '<input type="radio" class="mdl-radio__button" checked>'+
-            '</label></li><li class="item-center">'+
-            '<div class="mdl-textfield mdl-js-textfield">'+
-                '<input class="mdl-textfield__input" type="text" value="'+value+'">'+
-                '<label class="mdl-textfield__label">请输入选项内容</label>'+
-            '</div></li><li class="item-right">'+
-        '<button type="button" class="mdl-chip__action radio-del"><i class="material-icons">cancel</i></button></li></ul></div>';
-    $('.redio-optios').append( html ); 
+                    '<ul>'+
+                        '<li class="item-left">'+
+                            '<input type="radio" checked>'+
+                        '</li>'+
+                        '<li class="item-center">'+
+                            '<input type="text" class="form-control" placeholder="请输入选项内容" value="'+value+'">'+
+                        '</li>'+
+                        '<li class="item-right"><span class="radio-del"><i class="fa fa-remove fa-lg"></i></span></li>'+
+                    '</ul>' +
+                '</div>';
+    $('.radio-optios').append( html ); 
     bindDel();
-    componentHandler.upgradeDom(); 
+    init_icheck();
 }
 
 /**
@@ -238,17 +298,19 @@ function addCheckboxOption(val){
         var value = val;
     }
     var html = '<div class="item item-add">'+
-            '<ul><li class="item-left"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
-                '<input type="checkbox" class="mdl-checkbox__input" checked>'+
-            '</label></li><li class="item-center">'+
-            '<div class="mdl-textfield mdl-js-textfield">'+
-                '<input class="mdl-textfield__input" type="text" value="'+value+'">'+
-                '<label class="mdl-textfield__label">请输入选项内容</label>'+
-            '</div></li><li class="item-right">'+
-        '<button type="button" class="mdl-chip__action radio-del"><i class="material-icons">cancel</i></button></li></ul></div>';
+                    '<ul>'+
+                        '<li class="item-left">'+
+                            '<input type="checkbox" checked>'+
+                        '</li>'+
+                        '<li class="item-center">'+
+                            '<input type="text" class="form-control" placeholder="请输入选项内容" value="'+value+'">'+
+                        '</li>'+
+                        '<li class="item-right"><span class="radio-del"><i class="fa fa-remove fa-lg"></i></span></li>'+
+                    '</ul>' +
+                '</div>';
     $('.checkbox-optios').append( html ); 
     bindDel();
-    componentHandler.upgradeDom(); 
+    init_icheck();
 }
 
 /**
@@ -289,17 +351,19 @@ $('.addradio').click(function(){
     item.type = 'radio';
     item.title = $('.radio-content #radio-title').val();
     item.options = [];
-    $('.redio-optios .item').each(function(index,element){
-        var value = $(this).find('.mdl-textfield__input').val();
+    $('.radio-optios .item').each(function(index,element){
+        var value = $(this).find('.item-center input').val();
         if( value != '' ){
             item.options.push( value );
         } 
     })
     item.others = $('#radio-switch').is(':checked') ? true : false;
-    if( item.title == '' ){
-        showTips('请填写选项标题');
+    item.img = $('.radio-content .imgUrl').val();
+
+    if( item.title == '.radio-content' ){
+        showTips('请填写选项标题','error');
     }else if( item.options.length<2 ){
-        showTips('选项不能少于两个');
+        showTips('选项不能少于两个','error');
     }else{
         
         if( $(this).hasClass('edit') ){
@@ -330,23 +394,25 @@ $('.addcheckbox').click(function(){
     item.title = $('.checkbox-content #checkbox-title').val();
     item.options = [];
     $('.checkbox-optios .item').each(function(index,element){
-        var value = $(this).find('.mdl-textfield__input').val();
+        var value = $(this).find('.item-center input').val();
         if( value != '' ){
             item.options.push( value );
         } 
     })
     item.others = $('#checkbox-switch').is(':checked') ? true : false;
+    item.img = $('.checkbox-content .imgUrl').val();
+
     if( item.title == '' ){
-        showTips('请填写选项标题');
+        showTips('请填写选项标题','error');
     }else if( item.options.length<2 ){
-        showTips('选项不能少于两个');
+        showTips('选项不能少于两个','error');
     }else{
         if( $(this).hasClass('edit') ){
             //编辑
             var id = $('#editid').val();
             showView( item.type ,item, id )
             updateDatas( item,id );
-            reset('chechbox');
+            reset('checkbox');
             //清除编辑标志
             $(this).removeClass('edit');
             $('#editid').val('');
@@ -367,8 +433,10 @@ $('.addtext').click(function(event) {
     var item = {};
     item.type = 'text';
     item.title = $('.text-content #text-title').val();
+    item.img = $('.text-content .imgUrl').val();
+
     if( item.title == '' ){
-        showTips('请填写选项标题');
+        showTips('请填写选项标题','error');
     }else{
         if( $(this).hasClass('edit') ){
             //编辑
@@ -413,21 +481,8 @@ function updateDatas(data,id){
         }
         
     }
-    //console.log( $('#datas').val() );
-    //console.log( JSON.parse($('#datas').val()) )
-}
-
-/**
- * material design消息提示
- * @param  {string} msg 消息内容
- */
-function showTips(msg){
-    var notification = document.querySelector('.mdl-js-snackbar');
-    var data = {
-        message: msg,
-        timeout: 3000
-    };
-    notification.MaterialSnackbar.showSnackbar(data);  
+    console.log( $('#datas').val() );
+    console.log( JSON.parse($('#datas').val()) )
 }
 
 /**
@@ -443,18 +498,22 @@ function showView(type,data,id){
             var itemID = $('.showitem').length+1;
             var radioHtml = '<div class="showitem" id="'+itemID+'">';
             radioHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+
+            if( data.img !='' ){
+                radioHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
+
             radioHtml += '<ul>';
             for( var i=0;i<data.options.length;i++ ){
-                radioHtml += '<li><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
-                                '<input type="radio" class="mdl-radio__button" name="options-'+itemID+'">'+
-                            '</label>'+
-                            '<span>'+data.options[i]+'</span></li>';
+                radioHtml += '<li><label>'+
+                                '<input type="radio"  name="options-'+itemID+'"><span>'+data.options[i]+'</span>'+
+                            '</label></li>';
             }
             radioHtml += '</ul>';
             radioHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
             radioHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
             $('.showbox').append(radioHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }else{
             //更新
@@ -465,19 +524,21 @@ function showView(type,data,id){
 
             
             var radioHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            if( data.img !='' ){
+                radioHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
             radioHtml += '<ul>';
             for( var i=0;i<data.options.length;i++ ){
-                radioHtml += '<li><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
-                                '<input type="radio" class="mdl-radio__button" name="options-'+itemID+'">'+
-                            '</label>'+
-                            '<span>'+data.options[i]+'</span></li>';
+                radioHtml += '<li><label>'+
+                                '<input type="radio" name="options-'+itemID+'"><span>'+data.options[i]+'</span>'+
+                            '</label></li>';
             }
             radioHtml += '</ul>';
             radioHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
             radioHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
 
             $(dom).append(radioHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }
         
@@ -487,19 +548,25 @@ function showView(type,data,id){
             //新插入
             var itemID = $('.showitem').length+1;
             var checkboxHtml = '<div class="showitem" id="'+itemID+'">';
-            checkboxHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+            checkboxHtml += '<p class="showitem-title"><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+
+            if( data.img !='' ){
+                checkboxHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
+
             checkboxHtml += '<ul>';
             for( var i=0;i<data.options.length;i++ ){
-                checkboxHtml += '<li><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
-                                '<input type="checkbox" class="mdl-checkbox__input">'+
+                checkboxHtml += '<li><label>'+
+                                '<input type="checkbox">'+
                             '</label>'+
                             '<span>'+data.options[i]+'</span></li>';
             }
             checkboxHtml += '</ul>';
             checkboxHtml += data.others ? '<p>其他：<span class="others-line"></span></p>' : '';
             checkboxHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
+
             $('.showbox').append(checkboxHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }else{
             //编辑
@@ -508,11 +575,14 @@ function showView(type,data,id){
             $(dom).find('ul').remove();
             $(dom).find('a').remove();
 
-            var checkboxHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            var checkboxHtml = '<p class="showitem-title"><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            if( data.img !='' ){
+                checkboxHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
             checkboxHtml += '<ul>';
             for( var i=0;i<data.options.length;i++ ){
-                checkboxHtml += '<li><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
-                                '<input type="checkbox" class="mdl-checkbox__input">'+
+                checkboxHtml += '<li><label>'+
+                                '<input type="checkbox">'+
                             '</label>'+
                             '<span>'+data.options[i]+'</span></li>';
             }
@@ -521,7 +591,7 @@ function showView(type,data,id){
             checkboxHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
 
             $(dom).append(checkboxHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }
         
@@ -531,11 +601,16 @@ function showView(type,data,id){
             //新插入
             var itemID = $('.showitem').length+1;
             var textHtml = '<div class="showitem" id="'+itemID+'">';
-            textHtml += '<p><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+            textHtml += '<p class="showitem-title"><b class="order">'+itemID+'. </b>'+data.title+'</p>';
+
+            if( data.img !='' ){
+                textHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
+
             textHtml += '<p><span class="others-line"></span></p>';
             textHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a></div>';
             $('.showbox').append(textHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }else{
             //编辑
@@ -544,11 +619,14 @@ function showView(type,data,id){
             $(dom).find('a').remove();
 
             var textHtml = '<p><b class="order">'+((id-0+1)-0)+'. </b>'+data.title+'</p>';
+            if( data.img !='' ){
+                textHtml += '<p class="qimg"><img src="'+data.img+'"></p>';
+            }
             textHtml += '<p><span class="others-line"></span></p>';
             textHtml += '<a class="edititem">编辑</a><a class="delitem">删除</a>';
 
             $(dom).append(textHtml);
-            componentHandler.upgradeDom();
+            init_icheck();
             bindClick();
         }
         
@@ -578,42 +656,72 @@ function bindClick(){
             $('#editid').val( id );
             if( data.type == 'radio' || data.type == 'checkbox' || data.type == 'text' ){
                 reset(data.type);
-                $('.'+data.type+' header button').addClass('edit');
+                $('.'+data.type+' .item-title button').addClass('edit');
             }
             
             if( data.type == 'radio' ){
                 $('#radio').click();
                 $('.radio-content #radio-title').val( data.title );
+                $('.radio-content .imgUrl').val( data.img );
+
+                $('.radio-content .imgOption').find('a').popover({
+                    html:true,
+                    content:'<img src="'+data.img+'" height="200px">',
+                    trigger:'click'
+                });
+                $('.radio-content .imgOption').css('visibility','visible');
+
                 if( data.others ){
-                    $('.radio .radio-content .radio-other').addClass('is-checked');
-                    document.getElementById('radio-switch').checked = true;
+                    //$('.radio .radio-content .radio-other').addClass('is-checked');
+                    //document.getElementById('radio-switch').checked = true;
+                    $('.radio #radio-switch').prop('checked',true);
+                    $('#radio-switch').iCheck('update');
                 }
                 for( var i=0;i<data.options.length;i++ ){
                     if( i>=2 ){
                         addRadioOption( data.options[i] );
                     }else{
-                        var dom = $('.redio-optios .item')[i];
-                        $(dom).find('.mdl-textfield__input').val( data.options[i] );
+                        var dom = $('.radio-optios .item')[i];
+                        $(dom).find('.item-center input').val( data.options[i] );
                     }
                 }
             }else if( data.type == 'checkbox' ){
                 $('#checkbox').click();
                 $('.checkbox-content #checkbox-title').val( data.title );
+                $('.checkbox-content .imgUrl').val( data.img );
+
+                $('.checkbox-content .imgOption').find('a').popover({
+                    html:true,
+                    content:'<img src="'+data.img+'" height="200px">',
+                    trigger:'click'
+                });
+                $('.checkbox-content .imgOption').css('visibility','visible');
+
                 if( data.others ){
-                    $('.checkbox .checkbox-content .checkbox-other').addClass('is-checked');
-                    document.getElementById('checkbox-switch').checked = true;
+                    /*$('.checkbox .checkbox-content .checkbox-other').addClass('is-checked');
+                    document.getElementById('checkbox-switch').checked = true;*/
+                    $('.checkbox #checkbox-switch').prop('checked',true);
+                    $('#checkbox-switch').iCheck('update');
                 }
                 for( var i=0;i<data.options.length;i++ ){
                     if( i>=2 ){
                         addCheckboxOption( data.options[i] );
                     }else{
                         var dom = $('.checkbox-optios .item')[i];
-                        $(dom).find('.mdl-textfield__input').val( data.options[i] );
+                        $(dom).find('.item-center input').val( data.options[i] );
                     }
                 }
             }else if( data.type == 'text' ){
                 $('#text').click();
                 $('.text-content #text-title').val( data.title );
+                $('.text-content .imgUrl').val( data.img );
+
+                $('.text-content .imgOption').find('a').popover({
+                    html:true,
+                    content:'<img src="'+data.img+'" height="200px">',
+                    trigger:'click'
+                });
+                $('.text-content .imgOption').css('visibility','visible');
             }
         }
     });
@@ -650,18 +758,36 @@ function bindClick(){
 function reset(option){
     if( option == 'radio' ){
         $('.radio-content #radio-title').val('');
-        $('.radio-content .redio-optios .item-add').remove();
-        $('.radio-content .redio-optios .item input').val('');
-        $('.radio-content .radio-other').removeClass('is-checked');
-        $('#radio-switch').attr('checked',false);
+
+        $('.radio-content .imgUrl').val('');
+        $('.radio-content .uploadFile').val('');
+        $('.radio-content .file-cover').val('');
+        $('.radio-content .imgOption').css('visibility','hidden');
+        
+
+        $('.radio-content .radio-optios .item-add').remove();
+        $('.radio-content .radio-optios .item-center input').val('');
+        $('#radio-switch').prop('checked',false);
+        $('#radio-switch').iCheck('update');
     }else if( option == 'checkbox' ){
         $('.checkbox-content #checkbox-title').val('');
+
+        $('.checkbox-content .imgUrl').val('');
+        $('.checkbox-content .uploadFile').val('');
+        $('.checkbox-content .file-cover').val('');
+        $('.checkbox-content .imgOption').css('visibility','hidden');
+
         $('.checkbox-content .checkbox-optios .item-add').remove();
         $('.radio-content .checkbox-optios .item input').val('');
-        $('.checkbox-content .checkbox-other').removeClass('is-checked');
         $('#checkbox-switch').attr('checked',false);
+        $('#checkbox-switch').iCheck('update');
     }else if( option == 'text' ){
         $('.text-content #text-title').val('');
+
+        $('.text-content .imgUrl').val('');
+        $('.text-content .uploadFile').val('');
+        $('.text-content .file-cover').val('');
+        $('.text-content .imgOption').css('visibility','hidden');
     }
 }
 
@@ -670,9 +796,9 @@ function reset(option){
  */
 $('#submit').click(function(){
     if( $('#survey-title').val() == '' ){
-        showTips('问卷标题不能为空');
+        showTips('问卷标题不能为空','error');
     }else if( $('#datas').val() == '' ){
-        showTips( '提交失败，请重新尝试' );
+        showTips( '提交失败，请重新尝试','error' );
     }else{
         showLoading();
         var title = $('#survey-title').val();
@@ -712,6 +838,16 @@ function showLoading(){
 function hideLoading(){
     $('.loadingbox').hide();
 }
+function init_icheck(){
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_minimal-grey',
+        radioClass: 'iradio_minimal-grey',
+        increaseArea: '20%' // optional
+    });    
+}
+$(document).ready(function(){
+    init_icheck();
+});
 </script>
 
 <%- include footer %>                                         

@@ -1,67 +1,103 @@
 <%- include header %> 
-        <div class="content mdl-grid--no-spacing">
-            <div class="mdl-components mdl-js-components mdl-grid mdl-grid--no-spacing allheight">
-                <%- include aside %>
-                <main class="mdl-components__pages mdl-cell mdl-cell--10-col ">
-                    <div class="mdl-grid">
-                       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp list-table">
-                            <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">ID</th>
-                                    <th>问卷ID</th>
-                                    <th>问卷标题</th>
-                                    <th>提交时间</th>
-                                    <th>提交人</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <% data.forEach(function(tag,index){ %>
-                                <tr id="<%=tag.id%>">
-                                    <td class="mdl-data-table__cell--non-numeric"><%= tag.id %></td>
-                                    <td><%= tag.surveyId %></td>
-                                    <td class="titlemore"><%= tag.title %></td>
-                                    <td><%= tag.createdAt %></td>
-                                    <td><%= tag.userId %></td>
-                                    <td>
-                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect showresult">查看</a>
-                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect Pink delbtn">删除</a>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                            </tbody>
-                        </table> 
-                        <div id="Pagination"></div>
-                    </div>
-                </main>
+    <div class="result-top shadow-2dp">
+        <form class="form-inline" role="form" style="display:inline-block;">
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="提交人姓名"  style="width:100px;">
             </div>
-        </div>
+            <div class="input-group date form_date" style="width:180px;">
+                <input class="form-control" type="text" readonly="" placeholder="提交时间" id="time">
+                <span class="input-group-addon add-on pointer"><i class="fa fa-calendar"></i></span>
+            </div>
+            
+        </form> 
+        <button class="btn btn-primary" id="dosearch">搜索</button>
+        <button class="btn <%=sort%>" id="sort">时间排序 
+            <span class="sort-time <%=sort%>">
+                <i class="fa fa-sort-asc"></i>
+                <i class="fa fa-sort-desc"></i>
+            </span>
+        </button>
+    </div>
+    <div class="content shadow-2dp" style="background-color: #ffffff">
+        <% if(data.length>0){ %> 
+        <div class="row" style="width:100%;padding:10px 0;">
+            <% data.forEach(function(item,index){ %>
+                <div class="info-box col-lg-1 col-md-2 col-sm-4" id="<%=item.id%>">
+                    <div class="thumbnail shadow-2dp">
+                        <img src="<%=item.icon%>">
+                            <div class="caption">
+                                <p class="caption-title"><%=item.name%></p>
+                                <p style="text-align: center;font-size:12px;color:#999"><%=item.createdAt%></p>
+                                <p class="align-center">
+                                    <a class="btn btn-info btn-sm showresult">查看</a>
+                                    <a class="btn btn-danger btn-sm delbtn">删除</a>
+                                </p>
+                            </div>
+                        </img>
+                    </div>
+                </div>
+            <% }) %>  
+        </div>  
+        <% }else{ %>
+        <p class="emptytip">未查询到结果</p>
+        <% } %>
+        <div id="Pagination"></div>            
     </div>
 <div class="modal">
     <div class="showbox mdl-shadow--6dp">
         <header>
-            <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored close-modal">
-                <i class="material-icons">close</i>
+            <button class="btn close-modal shadow-2dp">
+                <i class="fa fa-remove fa-lg"></i>
             </button>
         </header>
     </div>
-</div>  
+</div>
+<link rel="stylesheet" href="/stylesheets/bootstrap-datetimepicker.min.css">
+<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap-datetimepicker.zh-CN.js"></script>  
 <script>
-/**
- * material design消息提示
- * @param  {string} msg 消息内容
- */
-function showTips(msg){
-    var notification = document.querySelector('.mdl-js-snackbar');
-    var data = {
-        message: msg,
-        timeout: 3000
-    };
-    notification.MaterialSnackbar.showSnackbar(data);  
-}
+
+var pageUrl = '<%=pageUrl%>',
+    username = '<%=name%>',
+    time = '<%=time%>';
+// search
+$('#dosearch').click(function(){
+    var name = $('#username').val(),
+        time = $('#time').val();
+    if( name=='' && time=='' ){
+        showTips('请至少填写一个搜索条件','error');
+        return;
+    }
+    window.location.href = pageUrl+'?name='+name+'&time='+time+'&page=<%=currentPage%>';
+});
+// sort
+$('#sort').click(function(){
+    if( $(this).hasClass('asc') ){
+        $(this).removeClass('asc').addClass('deac');
+        var sort = 'desc';
+    }else{
+        $(this).removeClass('desc').addClass('asc');
+        var sort = 'asc';
+    }
+    if( username!='' || time!='' ){
+        window.location.href = pageUrl+'?name='+name+'&time='+time+'&page=<%=currentPage%>&sort='+sort;
+    }else{
+        window.location.href = pageUrl+'?sort='+sort+'&page=<%=currentPage%>';
+    }
+    
+});
+
+$(".form_date").datetimepicker({
+    language: 'zh-CN',
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    minView: 2,
+    startView: 2,
+    pickerPosition: "bottom-left"
+});
 //查看问卷结果详情
 $('.showresult').click(function(){
-    var id = $(this).parents('tr').attr('id');
+    var id = $(this).parents('.info-box').attr('id');
     $.ajax({
         type:'post',
         url:'/survey/result/p/'+id,
@@ -99,22 +135,31 @@ function renderResult(data){
                         var checked = '';
                     }
                     options += '<li>'+
-                                    '<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">'+
-                                        '<input disabled type="radio" class="mdl-radio__button" name="radio-'+d.id+'" '+checked+'>'+
+                                    '<label class="'+checked+'">'+
+                                        '<input disabled type="radio" name="radio-'+d.id+'" '+checked+'>'+
+                                        '<span>'+d.content+'</span>'+
                                     '</label>'+
-                                    '<span>'+d.content+'</span>'+
                                 '</li>';
                 }
+
                 if( data[i].other == 1 ){
                     var otherResult = data[i].otherResult ? data[i].otherResult : '';
+                    var checked = otherResult ? 'checked':'';
                     var other = '<p>'+
-                                    '其他：<span class="others-line">'+otherResult+'</span>'+
+                                    '其他：<span class="others-line '+checked+'">'+otherResult+'</span>'+
                                 '</p>';
                 }else{
                     var other = '';
                 }
+
+                if( data[i].img ){
+                    var img = '<p class="showimg"><img src="'+data[i].img+'"><p>';
+                }else{
+                    var img = '';
+                }
+
                 html += '<div class="showitem" id="'+data[i].id+'">'+
-                            '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+
+                            '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+img+
                             '<ul>'+options+'</ul>'+other+
                         '</div>';
             }else if( data[i].type == 2 ){
@@ -127,14 +172,15 @@ function renderResult(data){
                         var checked = '';
                     }
                     options += '<li>'+
-                                    '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">'+
-                                        '<input disabled type="checkbox" class="mdl-checkbox__input" '+checked+'>'+
+                                    '<label class="'+checked+'">'+
+                                        '<input disabled type="checkbox" '+checked+'>'+
+                                        '<span>'+d.content+'</span>'+
                                     '</label>'+
-                                    '<span>'+d.content+'</span>'+
                                 '</li>';
                 }
                 if( data[i].other == 1 ){
                     var otherResult = data[i].otherResult ? data[i].otherResult : '';
+                    var checked = otherResult?'checked':'';
                     var other = '<p>'+
                                     '其他：<span class="others-line">'+otherResult+'</span>'+
                                 '</p>';
@@ -148,7 +194,7 @@ function renderResult(data){
             }else if( data[i].type == 3 ){
                 html += '<div class="showitem" id="'+data[i].id+'">'+
                             '<p><b class="order">'+(i-0+1)+'. </b>'+data[i].title+'</p>'+
-                            '<p>'+
+                            '<p class="checked">'+
                                 '<span class="others-line">'+data[i].result+'</span>'+
                             '</p>'+
                         '</div>';
@@ -158,13 +204,21 @@ function renderResult(data){
             $('.showbox h4').remove();
             $('.showbox .showitem').remove();
             $('.showbox').append(html);
-            componentHandler.upgradeDom();
+            //init_icheck();
         }
     }
 }
+function init_icheck(){
+    
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_minimal-grey',
+        radioClass: 'iradio_minimal-grey',
+        increaseArea: '20%' // optional
+    });    
+}
 //删除结果
 $('.delbtn').click(function(){
-    var id = $(this).parents('tr').attr('id');
+    var id = $(this).parents('.info-box').attr('id');
     $.ajax({
         type:'GET',
         url:'/survey/result/del/'+id,
@@ -183,9 +237,10 @@ $('.delbtn').click(function(){
     })
 });
 //分页
+var totalPages = <%=totalPages%>;
 var options = {  
     currentPage:"<%=currentPage%>",  
-    totalPages:"<%=totalPages%>",  
+    totalPages:totalPages,  
     size:"large",  
     alignment:"center",  
     itemContainerClass: function (type, page, current) {  
@@ -198,9 +253,17 @@ var options = {
         //alert("Current page changed, old: "+oldPage+" new: "+newPage);  
     },  
     pageUrl:function(type,page,current){  
-        return "/survey/result/"+page;  
+        //return "/survey/result/"+page;  
+        if( username || time ){
+            url = pageUrl+'?name='+username+'&time='+time+'&page='+page;
+        }else{
+            var url = pageUrl+'?page='+page;
+        }
+        return url;
     }  
 };
-$("#Pagination").bootstrapPaginator(options);
+if( totalPages>1 ){
+    $("#Pagination").bootstrapPaginator(options);
+}
 </script>
 <%- include footer %>                                         

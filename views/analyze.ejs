@@ -1,0 +1,109 @@
+<%- include header %> 
+    <div class="content">
+        <div style="display:block;width:100%">
+            <div class="analyze-top shadow-2dp">
+                <h3><%=survey.title%></h3>
+                <p>已提交答卷数：<%= survey.count%></p>
+            </div>       
+            <% survey.question.forEach(function(q,index){ %>
+            <% if( q.type ==1 || q.type == 2 ){ %>
+            <div class="question-item shadow-2dp">
+                <div class="qitem">
+                    <p class="option-title"><%=index+1%>. <%=q.title%></p>
+                    <% if( q.img ){ %>
+                    <p class="showimg"><img src="<%=q.img%>"></p>
+                    <% } %>
+                    <ul>
+                    <% q.option.forEach(function(o,i){ %>
+                        <% if( q.type == 1 ){ %>
+                            <li>
+                                <label>
+                                    <input class="input-icheck" type="radio" name="radio" disabled> <%= o.content%>
+                                </label>
+                            </li>
+                        <% }else{ %>
+                            <li>
+                                <label>
+                                    <input class="input-icheck" type="checkbox" name="checkbox" disabled> <%= o.content%>
+                                </label>
+                            </li>
+                        <% } %>
+                        
+                    <%})%>
+                    <% if( q.other == 1 ){ %>
+                        <li>其他：<span class="others-line"></span></li>
+                    <% } %>
+                    </ul>
+                </div>
+                <div class="qitem" id="question-<%=q.id%>"></div>
+            </div>
+            <% }else{ %>
+            <div class="question-item shadow-2dp">
+                <div class="qitem qitem-text">
+                    <p class="option-title"><%=index+1%>. <%=q.title%></p>
+                    <% if( q.img ){ %>
+                    <p class="showimg"><img src="<%=q.img%>"></p>
+                    <% } %>
+                    <p><span class="others-line"></span></p>
+                </div>
+            </div>
+            <% } %>
+            <% }) %> 
+        </div>   
+    </div>
+<input type="hidden" id="datas" value="<%=JSON.stringify(survey)%>">
+<script type="text/javascript" src="/javascripts/echarts.common.min.js"></script>
+<script type="text/javascript">
+var data = $('#datas').val(),
+    data = JSON.parse(data);
+var count = <%=survey.count%>;
+if( count>0 ){
+    var question = data.question;
+    for( var i=0;i<question.length;i++ ){
+        if( question[i].type == 1 || question[i].type == 2 ){
+            renderChart( question[i].id , question[i].analyze );
+        }
+    }
+}  
+
+function renderChart(qid,data){
+    var chart = echarts.init(document.getElementById('question-'+qid));
+
+    option = {
+        tooltip : {
+            trigger: 'item',
+            textStyle:{
+                fontSize:16
+            },
+            formatter: "{a}{b} <br/> 选择次数： {c} <br/> 占比：{d}%"
+        },
+        textStyle:{
+            fontSize:14,
+        },
+        series : [
+            {
+                name: '选项：',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '50%'],
+                data: data,
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    chart.setOption(option);
+}
+$(document).ready(function(){
+    $('.input-icheck').iCheck({
+        checkboxClass: 'icheckbox_minimal-grey',
+        radioClass: 'iradio_minimal-grey',
+    });
+})
+</script>
+<%- include footer %>                                         

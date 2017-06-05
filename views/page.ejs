@@ -34,12 +34,16 @@
     <div class="mdl-layout__container content">
         <div class="mdl-grid mdl-grid--no-spacing">
             <div class="survey-page mdl-cell mdl-cell--8-col mdl-shadow--4dp">
-                <h3 class="survey-page-title"><%=title%></h3>
-                <input type="hidden" id="surveyId" value="<%=id%>">
-                <% question.forEach(function(item,index){ %>
+                <h3 class="survey-page-title"><%=result.title%></h3>
+                <input type="hidden" id="surveyId" value="<%=result.id%>">
+                <input type="hidden" id="userId" value="6">
+                <% result.question.forEach(function(item,index){ %>
                     <% if( item.type == 1 ){ %>
                     <div class="surveyitem radio" id="question-<%=item.id%>">
                         <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <% if( item.img ){ %>
+                        <p class="showimg"><img src="<%=item.img%>"></p>
+                        <% } %>
                         <ul>
                             <% item.option.forEach(function(option,i){ %>
                             <li id="option-<%=option.id%>">
@@ -61,6 +65,9 @@
                     <% }else if( item.type == 2 ){ %>
                     <div class="surveyitem checkbox" id="question-<%=item.id%>">
                         <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <% if( item.img ){ %>
+                        <p class="showimg"><img src="<%=item.img%>"></p>
+                        <% } %>
                         <ul>
                             <% item.option.forEach(function(option,i){ %>
                             <li id="option-<%=option.id%>">
@@ -82,6 +89,9 @@
                     <% }else if( item.type == 3 ){ %>
                     <div class="surveyitem text" id="question-<%=item.id%>">
                         <p><b class="order"><%=index+1%>. </b><%=item.title%></p>
+                        <% if( item.img ){ %>
+                        <p class="showimg"><img src="<%=item.img%>"></p>
+                        <% } %>
                         <div>
                             <div class="mdl-textfield mdl-js-textfield">
                                 <textarea class="mdl-textfield__input" type="text" rows="1"></textarea>
@@ -91,7 +101,11 @@
                     <% } %>
                 <% }) %>
                 <div class="survey-page-bottom">
+                <% if(terminal=='web'){ %>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect close">关闭</button>
+                <% }else if( terminal=='m' ){ %>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect submit">提交</button>
+                <% } %>
                 </div>
             </div>
             
@@ -237,6 +251,7 @@ $('.submit').click(function(){
         showTips('请完成问卷后提交');
     }else{
         var surveyId = $('#surveyId').val();
+        var userId = $('#userId').val();
         console.log(data);
         var data = JSON.stringify(data);
         $.ajax({
@@ -244,7 +259,8 @@ $('.submit').click(function(){
             url:'/survey/p/'+surveyId,
             data:{
                 surveyId:surveyId,
-                data:data
+                data:data,
+                userId:userId
             },
             success:function(result){
                 console.log(result);
@@ -263,6 +279,9 @@ $('.submit').click(function(){
             }
         })
     }
+});
+$('.close').click(function(){
+    window.close();
 })
 </script>
 </body>

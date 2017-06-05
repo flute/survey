@@ -1,54 +1,56 @@
-<%- include header %> 
-        <div class="content mdl-grid--no-spacing">
-            <div class="mdl-components mdl-js-components mdl-grid mdl-grid--no-spacing allheight">
-                <%- include aside %>
-                <main class="mdl-components__pages mdl-cell mdl-cell--10-col ">
-                    <div class="mdl-grid">
-                       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp list-table">
-                            <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">问卷ID</th>
-                                    <th>标题</th>
-                                    <th>创建时间</th>
-                                    <th>创建人</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <% data.forEach(function(tag,index){ %>
-                                <tr id="<%=tag.id%>">
-                                    <td class="mdl-data-table__cell--non-numeric"><%= tag.id %></td>
-                                    <td class="titlemore"><%= tag.title %></td>
-                                    <td><%= tag.createdAt %></td>
-                                    <td><%= tag.adminId %></td>
-                                    <td>
-                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="/survey/p/<%=tag.id%>" target="_blank">查看</a>
-                                        <!-- <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect Teal">修改</button> -->
-                                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect Pink delbtn">删除</a>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                            </tbody>
-                        </table> 
-                        <div id="Pagination"></div>
-                    </div>
-                </main>
+<%- include header %>
+    <div class="result-top shadow-2dp">
+        <form class="form-inline" role="form" style="display:inline-block;">
+            <div class="form-group">
+                <input type="text" class="form-control" id="title" placeholder="问卷标题" style="width:100px;">
             </div>
-        </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="创建人" style="width:100px;">
+            </div>
+            
+        </form> 
+        <button class="btn btn-primary" id="dosearch">搜索</button>
+    </div>
+
+    <div class="content shadow-2dp">
+        <% if(data.length>0){ %>        
+       <table class="table table-striped table-hover table-responsive list-table">
+            <thead>
+                <tr>
+                    <td>问卷ID</td>
+                    <td>标题</td>
+                    <td>创建时间</td>
+                    <td>创建人</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(function(tag,index){ %>
+                    <tr id="<%=tag.id%>">
+                        <td><%= tag.id %></td>
+                        <td class="titlemore"><%= tag.title %></td>
+                        <td><%= tag.createdAt %></td>
+                        <td><%= tag.name %></td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="/survey/p/<%=tag.id%>/web" target="_blank">查看问卷</a>
+                            <a class="btn btn-info btn-sm" href="/survey/result/<%=tag.id%>?page=1">明细查询</a>
+                            <a class="btn btn-info btn-sm" href="/survey/analyze/<%=tag.id%>">汇总分析</a>
+                            <a class="btn btn-danger btn-sm delbtn">删除</a>
+                            <a class="btn btn-primary btn-sm publish"><%= tag.publish===0? '发布':'取消发布' %></a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table> 
+        <% }else{ %>
+        <p class="emptytip">未查询到结果</p>
+        <% } %>
+        <div id="Pagination"></div>      
     </div>
 <script>
-/**
- * material design消息提示
- * @param  {string} msg 消息内容
- */
-function showTips(msg){
-    var notification = document.querySelector('.mdl-js-snackbar');
-    var data = {
-        message: msg,
-        timeout: 3000
-    };
-    notification.MaterialSnackbar.showSnackbar(data);  
-}
+var pageUrl = '<%=pageUrl%>',
+    title = '<%=stitle%>',
+    username = '<%=username%>';
 //删除问卷
 $('.delbtn').click(function(){
     var id = $(this).parents('tr').attr('id');
@@ -60,19 +62,53 @@ $('.delbtn').click(function(){
                 showTips('删除成功');
                 $('#'+id).remove();
             }else{
-                showTips('删除失败，请重新尝试');
+                showTips('删除失败，请重新尝试','error');
             }
         },
         error:function(e){
             console.log(e);
-            showTips('删除失败，请重新尝试');
+            showTips('删除失败，请重新尝试','error');
         }
     })
 });
+//发布问卷
+$('.publish').click(function(){
+    var surveyId = $(this).parents('tr').prop('id');
+    var text = $(this).text()=='发布'? '取消发布':'发布';
+    var msg = $(this).text()=='发布'? '发布':'取消发布';
+    $.ajax({
+        type:'GET',
+        url:'/survey/list/publish/'+surveyId,
+        success:function(result){
+            if( result.status == 1 ){
+                showTips(msg+'成功');
+                $('#'+surveyId).find('.publish').text(text);
+            }else{
+                showTips(msg+'失败，请重新尝试','error');
+            }
+        },
+        error:function(e){
+            console.log(e);
+            showTips(msg+'失败，请重新尝试','error');
+        }
+    })
+})
+// search
+$('#dosearch').click(function(){
+    var username = $('#username').val(),
+        title = $('#title').val();
+    if( username=='' && title=='' ){
+        showTips('请至少填写一个搜索条件','error');
+        return;
+    }
+    window.location.href = pageUrl+'?name='+username+'&title='+title+'&page=<%=currentPage%>';
+});
+
+var totalPages = <%=totalPages%>;
 //分页
 var options = {  
     currentPage:"<%=currentPage%>",  
-    totalPages:"<%=totalPages%>",  
+    totalPages:totalPages,  
     size:"large",  
     alignment:"center",  
     itemContainerClass: function (type, page, current) {  
@@ -85,10 +121,18 @@ var options = {
         //alert("Current page changed, old: "+oldPage+" new: "+newPage);  
     },  
     pageUrl:function(type,page,current){  
-        return "/survey/list/"+page;  
+        //return "/survey/list/"+page;  
+        if( username || time ){
+            url = pageUrl+'?name='+username+'&time='+time+'&page='+page;
+        }else{
+            var url = pageUrl+'?page='+page;
+        }
+        return url;
     }  
 };
+if( totalPages>1 ){
+    $("#Pagination").bootstrapPaginator(options);
+}
 
-$("#Pagination").bootstrapPaginator(options);
 </script>
 <%- include footer %>                                         

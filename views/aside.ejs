@@ -1,22 +1,27 @@
-<aside class="mdl-components-aside  mdl-shadow--4dp mdl-cell mdl-cell--2-col ">
-    <ul class="demo-list-icon mdl-list">
-        <a class="mdl-list__item <% if(tag=='create'){ %> active <% } %>" href="/survey/create">
-            <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-icon">mode_edit</i>
-                创建问卷
-            </span>
-        </a>
-        <a class="mdl-list__item <% if(tag=='list'){ %> active <% } %>"  href="/survey/list/1">
-            <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-icon">list</i>
-                查看问卷
-            </span>
-        </a>
-        <a class="mdl-list__item <% if(tag=='result'){ %> active <% } %>"  href="/survey/result/1">
-            <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-icon">check_circle</i>
-                问卷结果
-            </span>
-        </a>
+<div class="aside shadow-4dp">
+    <ul class="nav nav-list">
+        <li <% if(tag=='create'){ %> class="active" <% } %> >
+            <a href="/survey/create">
+                <i class="fa fa-camera-retro fa-lg fa-fw"></i>
+                <span class="menu-text"> 创建问卷 </span>
+            </a>
+        </li>
+        <li <% if(tag=='list'){ %> class="active" <% } %> >
+            <a href="/survey/list/1">
+                <i class="fa fa-camera-retro fa-lg fa-fw"></i>
+                <span class="menu-text"> 查看问卷 </span>
+            </a>
+        </li>
+        <li <% if(tag=='result'){ %> class="active" <% } %> >
+            <a href="/survey/result/1">
+                <i class="fa fa-camera-retro fa-lg fa-fw"></i>
+                <span class="menu-text"> 问卷结果 </span>
+            </a>
+        </li>
     </ul>
-</aside>
+    <!-- 最小化菜单 -->
+    <!-- <p class="mini">
+        <i class="fa fa-angle-double-left"></i>
+        <i class="fa fa-angle-double-right"></i>
+    </p> -->
+</div>

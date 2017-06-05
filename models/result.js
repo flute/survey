@@ -1,15 +1,12 @@
-var mysql = require('mysql');
-var conf = require('../conf/db.js');
-//使用连接池，提升性能
-var pool = mysql.createPool( conf.mysql );
+var mysql = require('../service/mysql');
 //async
 var async = require('async');
 //时间转换组件
 var moment = require('moment');
 
 module.exports = {
-	getResult : function(page,callback){
-		pool.getConnection(function(err,connection){
+	getResult : function(page,id,name,time,sort,callback){
+		mysql(function(err,connection){
 			if(err){
 				callback(err);
 				return;
@@ -19,20 +16,57 @@ module.exports = {
 			}else{
 				var startNumber = (page-1)*10;
 			}
-			connection.query("select * from t_survey_result limit "+startNumber+",10",function(error,result){
-				if(result){
-					connection.query("select id from t_survey_result",function(err,re){
-						if( re ){
+			if( time ){
+				var startTime = time+' 00:00:00',
+					endTime = time+' 23:59:59';
+			}
+			if( sort ){
+				if( sort == 'asc' ){
+					var sortSql = " order by createdAt asc";
+				}else{
+					var sortSql = " order by createdAt desc"
+				}
+			}else{ var sortSql = ""; }
 
+			if( name && time ){
+				var sql = "select * from t_survey_result where surveyId="+id+" and userId='"+name+"' and createdAt between '"+startTime+"' and '"+endTime+"' "+sortSql+" limit "+startNumber+",10",
+					countSql = "select * from t_survey_result where surveyId="+id+" and userId='"+name+"' and createdAt between '"+startTime+"' and '"+endTime+"'";
+			}else if(name){
+				var sql = "select * from t_survey_result where surveyId="+id+" and userId='"+name+"' "+sortSql+" limit "+startNumber+",10",
+					countSql = "select * from t_survey_result where surveyId="+id+" and userId='"+name+"'";
+			}else if(time){
+				var sql = "select * from t_survey_result where surveyId="+id+" and createdAt between '"+startTime+"' and '"+endTime+"' "+sortSql+" limit "+startNumber+",10",
+					countSql = "select * from t_survey_result where surveyId="+id+" and createdAt between '"+startTime+"' and '"+endTime+"'";
+			}else{
+				var sql = "select * from t_survey_result where surveyId="+id+sortSql+" limit "+startNumber+",10",
+					countSql = "select * from t_survey_result where surveyId="+id;
+			}
+			
+			connection.query(sql,function(error,result){
+				if(result){
+					connection.query(countSql,function(err,re){
+						if( re ){
 							var datas = [];
 							async.eachSeries( result, function(item,cb){
 								connection.query("select title from t_survey where id="+item.surveyId,function(err,res){
-									if( res ){
+									if( res && res.length>0 ){
 										item.title = res[0].title;	
-										datas.push(item);
+										connection.query("select name,icon from t_user where id="+item.userId,function(er,re){
+											if( re && re.length>0 ){
+												item.name = re[0].name;
+												item.icon = re[0].icon;
+												datas.push(item);
+												cb();
+											}else{
+												cb(er)
+											}
+										})
+									}else{
+										cb(err)
 									}
-									cb(err,res);
+									
 								})
+
 							},function(e){
 								if(e){
 									callback({
@@ -74,7 +108,7 @@ module.exports = {
 		})
 	},
 	getResultById:function(id,callback){
-		pool.getConnection(function(err,connection){
+		mysql(function(err,connection){
 			if( err ){
 				callback(err);
 				return;
@@ -112,7 +146,7 @@ module.exports = {
 		})
 	},
 	delResultById:function(id,callback){
-		pool.getConnection(function(err,connection){
+		mysql(function(err,connection){
 			if( err ){
 				callback(err);
 				return;

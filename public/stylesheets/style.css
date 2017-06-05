@@ -104,7 +104,9 @@ html, body {
 	/*background-color: rgb(0,188,212);	*/
 } 
 .create-content{
-	width: 90%;
+	display: inline-block;
+    width: 90%;
+    height: 100%;
 	margin: 10px 5%;
     border: 1px solid #efefef;
 }
@@ -115,16 +117,17 @@ html, body {
 	width: auto;
     margin-left: 100px;
 }
-.item .mdl-radio{
+.create-content .item .mdl-radio{
 	top: -15px;
     margin-right: 5px;
 }
-.item{
-	height: 50px;
-	overflow: hidden;
-	padding: 0 0 10px 10px;
+.create-content .item{
+	height: 54px;
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 0;
 }
-.item:hover{
+.create-content .item:hover{
 	background-color: #eee;
 }
 .create-content .mdl-textfield{
@@ -134,6 +137,7 @@ html, body {
 .radio-del{
 	/*margin-left: 20px;*/
 	display: none;
+	cursor: pointer;
 }
 .create-tab p{
 	width: 100%;
@@ -154,8 +158,8 @@ html, body {
 	border-bottom-color: rgb(233, 30, 99)
 }
 .cell-title{
-	height: 64px;
-    line-height: 64px;
+	height: 54px;
+    line-height: 54px;
     margin: 0;
     text-align: center;
     color: #fff;
@@ -193,6 +197,7 @@ html, body {
     margin-bottom: 10px;
     border-radius: 5px;
     position: relative;
+    overflow: hidden;
 }
 .others-line{
 	display: inline-block;
@@ -246,7 +251,7 @@ html, body {
 }
 #submit{
 	float: right;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: 10px;
     color: #eee;
 }
@@ -266,7 +271,7 @@ html, body {
     margin: 0;
 }
 .item-left,.item-right{
-	padding: 20px 0;
+	/*padding: 20px 0;*/
 	width: 7%;
 }
 .item-center{
@@ -299,9 +304,12 @@ html, body {
 }
 .list-table{
 	width: 100%;
+    background: #fff;
+    margin-bottom: 0;
 }
 .create-content .survey-title{
 	width: 100%;
+    margin-bottom: 10px;
 }
 .create-content .survey-title input{
 	text-align: center;
@@ -346,12 +354,20 @@ html, body {
     padding: 30px;
     background-color: #fff;
     border-radius: 5px;
+    position: relative;
 }
 .showbox h4{
 	text-align: center;
 }
 .close-modal{
 	float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: #eee;
 }
 .mdl-data-table.list-table tbody tr td{
 	padding: 9px 18px;
@@ -385,13 +401,13 @@ html, body {
     filter: blur(2px);
     -webkit-filter:blur(2px);
 }
-#Pagination ul li{
+/*#Pagination ul li{
 	list-style: none;
 	float: left;
-}
-#Pagination ul li.active a{
+}*/
+/*#Pagination ul li.active a{
 	background-color: #ccc;
-}
+}*/
 #Pagination{
 	display: inline-block;
     width: 100%;
@@ -410,4 +426,168 @@ html, body {
 	overflow: hidden;
 	text-overflow:ellipsis;
 	white-space: nowrap;
+}
+.create-box{
+	background-color: #fff;
+	padding-bottom: 5px;
+}
+.create-box .checkbox,.create-box .radio {
+    margin: 0;
+}
+.item-title{
+	height: 64px;
+    line-height: 64px;
+    text-align: center;
+}
+.item-left div{
+	vertical-align: -webkit-baseline-middle;
+}
+.item-right{
+	text-align: center;
+}
+.item-right i{
+	color: rgb(233, 30, 99);
+	vertical-align: -webkit-baseline-middle;
+}
+.add-option{
+	margin: 20px 0 10px 0;
+	padding-left: 9%;
+}
+.add-option label{
+	margin-left: 10%;
+}
+.showitem ul li span{
+	margin-left: 10px;
+	font-weight: normal;
+}
+.showitem-title{
+	height: 30px;
+    line-height: 30px;
+}
+.aside .nav>li>a {
+    padding: 15px 15px;
+}
+.item-title button{
+	color: #fff;
+	font-size: 16px;
+}
+.item-title button:hover,.item-title button:focus{
+	color: #eee;
+	background-color: rgba(158, 158, 158,0.5)
+}
+.result-top{
+    padding: 15px 10px;
+    background: #ffffff;
+    margin-bottom: 20px;
+}
+.question-item{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background: #ffffff;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+.question-item div.qitem{
+    flex: 1;
+    display: inline-flex;
+    position: relative;
+    min-height: 200px;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200px;
+}
+.analyze-top{
+    background: #ffffff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+} 
+.qitem ul{
+    list-style: none;
+    padding: 0;
+}
+.qitem ul label{
+    color: #666;
+    font-weight: normal;
+}
+.qitem ul label div{
+    margin-right: 10px;
+}
+.option-title{
+    font-size: 16px;
+}
+.question-item div.qitem.qitem-text{
+    min-height: auto;
+    padding: 10px 5px;
+}
+.emptytip{
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    background: #ffffff;
+    font-size: 16px;
+    color: #999999;
+    text-align: center;
+}
+.sort-time{
+    display: inline-flex;
+    flex-direction: column;
+    color: #cccccc;
+}
+.sort-time i{
+    display: inline-block;
+    height: 2px;
+    margin-top: -2px;
+}
+.sort-time.asc i:nth-child(1){
+    color: #000000;
+}
+.sort-time.desc i:nth-child(2){
+    color: #000000;
+}
+#sort.asc,#sort.desc{
+    background-color: #fafafa
+}
+#sort{
+    margin-left: 5%;
+}
+.uploadimg{
+    /*width: 60%;*/
+    display: inline-block;
+    margin: 0;
+    margin-top: 10px;
+}
+.uploadimg .control-label{
+    padding: 0;
+}
+.uploadimg .control-label .file-cover{
+    border-top-left-radius: 5px!important;
+    border-bottom-left-radius: 5px!important;
+}
+.qimg img{
+    height: 60px;
+}
+.qimg{
+    margin: 5px 0!important;
+    padding-left: 10px;
+}
+.showimg img{
+    height: 100px;
+}
+.imgOption{
+    display: inline-block;
+    visibility: hidden;
+}
+.popover-content{
+    overflow: auto;
+}
+.showitem label.checked,.showitem p.checked{
+    color: darkorange;
+}
+/*.popover-content img{
+    max-width: 200px;
+    height: auto;
+}*/
+.popover{
+    display: inline-table !important;
 }

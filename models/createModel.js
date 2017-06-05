@@ -4,7 +4,7 @@ var sql = {
     delete: 'delete from user where id=?',
     queryById: 'select * from user where id=?',
     queryAll: 'select * from user',
-    insertSurvey:'INSERT INTO t_survey(createdAt, updatedAt, adminId, title) VALUES(?,?,?,?)',
+    insertSurvey:'INSERT INTO t_survey(createdAt, updatedAt, adminId, name, code, title) VALUES(?,?,?,?,?,?)',
     insertSurveyQuestion: 'insert into t_survey_question(createdAt, updatedAt, surveyId, title, type) values(?,?,?,?,?)',
     insertSurveyOption: 'insert into t_survey_option(createdAt, updatedAt, questionId, content) values(,,,)'
 };

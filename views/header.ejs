@@ -1,58 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title><%=title%></title>
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/images/android-desktop.png">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="/images/ios-desktop.png">
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
-
-    <link rel="shortcut icon" href="/images/favicon.png">
-
-    <link rel="stylesheet" href="/stylesheets/icon.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/material.min.css">
-    <link rel="stylesheet" href="/stylesheets/material.cyan-green.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <!-- font-icon -->
+    <link rel="stylesheet" href="/stylesheets/font-awesome.min.css">
+    <!-- pagination -->
     <link rel="stylesheet" href="/stylesheets/pagination.css">
-    <script src="/javascripts/material.min.js"></script>
+    <!-- icheck -->
+    <link rel="stylesheet" href="/stylesheets/minimal/grey.css">
+    <!-- messenger -->
+    <link rel="stylesheet" href="/stylesheets/messenger.css">
+    <link rel="stylesheet" href="/stylesheets/messenger-theme-flat.css">
+    <!-- framework -->
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <!-- own-css -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- jquery+bootstrap+icheck+paginator+messenger -->
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/icheck.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap-paginator.min.js"></script>
+    <script type="text/javascript" src="/javascripts/messenger.min.js"></script>
+    <script type="text/javascript" src="/javascripts/messenger-theme-flat.js"></script>
+    <title><%=title%></title>
 </head>
 <body>
-    <div class="mdl-layout__container">
-        <header class="docs-layout-header mdl-layout__header is-casting-shadow">
-            <div class="mdl-layout__header-row Blue-Grey">
-                <span class="mdl-layout-title">调查问卷系统</span>
-                <div class="mdl-layout-spacer"></div>
-                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                        <i class="material-icons">search</i>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" id="search">
-                        <label class="mdl-textfield__label" for="search">Enter your query...</label>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- header -->
+            <div class="col-md-12 header-bg Blue-Grey">
+                <div class="header">
+                    <div class="header-title left">
+                        <%=user.currentRegion.shortName%>问卷调查系统
                     </div>
-                </div> -->
-                <span><%=user.userName%></span>
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                    <li class="mdl-menu__item logout">注销</li>
-                </ul>
+                    <div class="dropdown right header-right ">
+                        <span id="dropdownMenu" data-toggle="dropdown"><%=user.name%>
+                            <i class="fa fa-caret-down"></i>
+                        </span>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu">
+                            <li role="presentation logout">
+                                <a role="menuitem" tabindex="-1" href="javascript:window.close();"><i class="fa fa-power-off fa-fw"></i>&nbsp;关闭</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </header>
+            <!-- body -->
+            <div class="col-md-12 no-spacing">
+                <div class="content">
+                    <!-- aside -->
+                    <div class="aside shadow-4dp">
+                        <ul class="nav nav-list">
+                            <li <% if(tag=='create'){ %> class="active" <% } %> >
+                                <a href="/survey/create">
+                                    <i class="fa fa-edit fa-lg fa-fw"></i>
+                                    <span class="menu-text"> 创建问卷 </span>
+                                </a>
+                            </li>
+                            <li <% if(tag=='list'){ %> class="active" <% } %> >
+                                <a href="/survey/list?page=1">
+                                    <i class="fa fa-list-ul fa-lg fa-fw"></i>
+                                    <span class="menu-text"> 查看问卷 </span>
+                                </a>
+                            </li>
+                            <!-- <li <% if(tag=='result'){ %> class="active" <% } %> >
+                                <a href="/survey/result/1">
+                                    <i class="fa fa-check-square-o fa-lg fa-fw"></i>
+                                    <span class="menu-text"> 问卷结果 </span>
+                                </a>
+                            </li> -->
+                        </ul>
+                        <!-- 最小化菜单 -->
+                        <!-- <p class="mini">
+                            <i class="fa fa-angle-double-left"></i>
+                            <i class="fa fa-angle-double-right"></i>
+                        </p> -->
+                    </div>
+                    <!-- content -->
+                    <div class="main-content">
