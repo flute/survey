@@ -1,19 +1,19 @@
 # survey
 a simple survey system made by nodejs+express+mysql+material design
 
-##install
+## install
 1. `npm install`
-2. 配置数据库 `conf/db.js` ，导入sql文件 `mysql.sql`
+2. 配置数据库 `conf/db.js` ，导入sql文件 `conf/mysql.sql`
 3. `node app.js`
 
-##功能
+## 功能
 1. 登陆验证
 1. 问题类型包括 单选、多选及问答三类
 2. 查看问卷列表、删除
 3. 填写提交问卷
 4. 问卷结果列表及结果详情
 
-###注：
+### 注：
 在系统实现过程中，数据表的设计及数据操作有些麻烦，感兴趣的往下看：
 
 为了问卷结果的可读性及统计方便，数据表设计时将 问卷、问题、选项 分为三个表，在插入、读取问卷时，需要顺序、批量进行数据库操作。
