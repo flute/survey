@@ -9,7 +9,7 @@
         "async": "^2.1.4",
         "body-parser": "~1.15.1",
         "cookie-parser": "~1.4.3",
-        "debug": "~2.2.0",
+        "debug": "~4.1.1",
         "ejs": "~2.4.1",
         "express": "~4.13.4",
         "express-session": "latest",
